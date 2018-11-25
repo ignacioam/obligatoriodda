@@ -10,5 +10,5 @@ package dominio;
  * @author Ignacio
  */
 public class Mesa {
-    
+    private int numero; 
 }

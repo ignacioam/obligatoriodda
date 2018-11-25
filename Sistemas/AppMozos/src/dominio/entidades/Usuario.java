@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author juanc, Ignacio
  */
-public abstract class Usuario implements Serializable {
+public class Usuario implements Serializable {
 
     private String username;
     private String contrasenia;

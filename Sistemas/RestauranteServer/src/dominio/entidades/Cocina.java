@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dominio;
+package dominio.entidades;
 
 /**
  *
- * @author Ignacio
+ * @author Ignacio, Juan
  */
-public class Mesa {
-    private int numero; 
+public class Cocina extends UnidadProcesadora{
+
 }

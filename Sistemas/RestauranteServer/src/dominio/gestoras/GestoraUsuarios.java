@@ -14,10 +14,19 @@ public class GestoraUsuarios {
 
     private GestoraUsuarios() {
         colUsuarios = new ArrayList<>();
-        Usuario m = new Mozo("juanchip", "1234", "Juan Andrés Pérez");
-        colUsuarios.add(m);
+        cargarUsuarios();
     }
 
+    /**
+     * Precarga los usuarios
+     */
+    public void cargarUsuarios(){
+        Usuario m2 = new Mozo("jperez", "perez", "Juan Pérez");
+        Usuario m1 = new Mozo("imartins", "nacho", "Ignacio Martins");
+        colUsuarios.add(m1);
+        colUsuarios.add(m2);
+    }
+    
     /**
      * Singleton
      */

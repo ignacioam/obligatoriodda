@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package appmozos;
 
 import Presentacion.FrmLogin;
@@ -25,7 +20,7 @@ public class AppMozos {
      */
     public static void main(String[] args) throws RemoteException {
         try {
-            Sistema.setService((IServer) Naming.lookup("rmi://192.168.1.31/Server"));
+            Sistema.setService((IServer) Naming.lookup("rmi://192.168.1.48/Server"));
             new FrmLogin().setVisible(true);
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             Logger.getLogger(AppMozos.class.getName()).log(Level.SEVERE, null, ex);

@@ -17,7 +17,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
- * @author Juanchi Perez
+ * @author Juan, Ignacio
  */
 public class Server implements IServer {
 
@@ -36,13 +36,12 @@ public class Server implements IServer {
         return gsu.getUserPorUserName(username);
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) {        
         try {
             Server obj = new Server();
             IServer stub = (IServer) UnicastRemoteObject.exportObject(obj, 1099);
 
             Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
-            System.setProperty("java.rmi.server.hostname","192.168.1.1");
             registry.rebind("Server", stub);
 
             System.err.println("Server ready");

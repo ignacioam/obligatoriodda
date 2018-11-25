@@ -31,7 +31,7 @@ public class LoginController {
             if (server.iniciarSesion(ui.getUsername(), ui.getPassword())) {
                 Usuario u = server.getUserPorUserName(ui.getUsername());
                 if(u instanceof Mozo){
-                    ui.mostrarMensaje("Niceeeeeee");
+                    ui.mostrarMensaje("Niceeeeeee" + u.getNombre());
                 } else {
                     ui.mostrarMensaje("Niceeeeeee");
                 }

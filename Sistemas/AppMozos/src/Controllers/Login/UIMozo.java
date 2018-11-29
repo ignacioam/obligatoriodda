@@ -1,6 +1,6 @@
-package Controllers.Login;
+package controllers.Login;
 
-import dominio.entidades.Mozo;
+import entidades.Mozo;
 
 /**
  *

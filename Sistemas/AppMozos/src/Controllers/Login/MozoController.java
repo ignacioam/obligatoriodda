@@ -1,20 +1,20 @@
-package Controllers.Login;
+package controllers.Login;
 
-import Servicio.IServer;
-import dominio.entidades.Mozo;
+import entidades.Mozo;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import servicio.IService;
 /**
  *
  * @author Juan, Ignacio
  */
 public class MozoController {
 
-    IServer server;
+    IService server;
     UIMozo ui;
 
-    public MozoController(IServer server, UIMozo ui) {
+    public MozoController(IService server, UIMozo ui) {
         this.server = server;
         this.ui = ui;
     }

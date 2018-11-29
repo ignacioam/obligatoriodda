@@ -1,13 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Presentacion;
 
-import Controllers.Login.UILogin;
 import Controllers.Login.LoginController;
+import Controllers.Login.UILogin;
 import appmozos.Sistema;
-import javax.swing.JOptionPane;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 
 /**
  *
- * @author Juan Perez, Ignacio Martins
+ * @author Juanchi Perez
  */
 public class FrmLogin extends javax.swing.JFrame implements UILogin {
 
@@ -17,9 +23,10 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
      * Creates new form FrmLogin
      */
     public FrmLogin() {
-        initComponents();
-        setResizable(false);
+        setSize(900, 526);
+        setLocationRelativeTo(null);
         controller = new LoginController(this, Sistema.getService());
+        initComponents();
     }
 
     /**
@@ -31,70 +38,108 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        btnIniciarSesion = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
+        btnCerrar = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        lblMensaje = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar sesión");
+        setMaximumSize(new java.awt.Dimension(900, 526));
+        setMinimumSize(new java.awt.Dimension(900, 526));
+        setUndecorated(true);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setLabelFor(txtUsername);
-        jLabel1.setText("Nombre de usuario");
+        txtUsername.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        getContentPane().add(txtUsername);
+        txtUsername.setBounds(330, 220, 250, 40);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setLabelFor(txtPassword);
-        jLabel2.setText("Contraseña");
+        lblUsername.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUsername.setText("Nombre de usuario");
+        getContentPane().add(lblUsername);
+        lblUsername.setBounds(330, 190, 246, 23);
 
-        btnLogin.setText("Iniciar sesión");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        lblPassword.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPassword.setText("Contraseña");
+        getContentPane().add(lblPassword);
+        lblPassword.setBounds(330, 270, 246, 23);
+
+        btnIniciarSesion.setBackground(new java.awt.Color(98, 160, 240));
+        btnIniciarSesion.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        btnIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        btnIniciarSesion.setText("Iniciar sesión");
+        btnIniciarSesion.setBorder(null);
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnIniciarSesionActionPerformed(evt);
             }
         });
+        getContentPane().add(btnIniciarSesion);
+        btnIniciarSesion.setBounds(350, 360, 216, 53);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(330, 300, 250, 40);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(8, 8, 8)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        btnCerrar.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnCerrar.setText("x");
+        btnCerrar.setToolTipText("Cerrar");
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnCerrar);
+        btnCerrar.setBounds(870, 0, 30, 23);
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logologin.png"))); // NOI18N
+        getContentPane().add(lblLogo);
+        lblLogo.setBounds(409, 70, 90, 90);
+
+        lblMensaje.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        lblMensaje.setForeground(new java.awt.Color(255, 102, 102));
+        lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(lblMensaje);
+        lblMensaje.setBounds(20, 470, 880, 16);
+
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/bglogin.png"))); // NOI18N
+        getContentPane().add(lblBackground);
+        lblBackground.setBounds(0, 0, 900, 520);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        controller.iniciarSesion();
-    }//GEN-LAST:event_btnLoginActionPerformed
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        boolean ok = true;
+        String user = txtUsername.getText().trim();
+        String pass = new String(txtPassword.getPassword()).trim();
+        if (user == null || user.length() == 0) {
+            txtUsername.setBorder(BorderFactory.createLineBorder(Color.red));
+            ok = false;
+        }
+
+        if (pass == null || pass.length() == 0) {
+            txtPassword.setBorder(BorderFactory.createLineBorder(Color.red));
+            ok = false;
+        }
+
+        if (ok) {
+            controller.iniciarSesion();
+        }
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btnCerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -132,9 +177,13 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel btnCerrar;
+    private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
@@ -151,7 +200,11 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
 
     @Override
     public void mostrarMensaje(String msg) {
-        JOptionPane.showMessageDialog(null, msg);
+        lblMensaje.setText(msg);
     }
 
+    @Override
+    public void cerrarForm() {
+        this.dispose();
+    }
 }

@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package restauranteserver;
 
+import Servicio.IServer;
+import dominio.entidades.Mozo;
 import dominio.entidades.Usuario;
 import dominio.gestoras.GestoraProductos;
 import dominio.gestoras.GestoraServicios;
@@ -36,7 +33,7 @@ public class Server implements IServer {
         return gsu.getUserPorUserName(username);
     }
 
-    public static void main(String args[]) {        
+    public static void main(String args[]) {
         try {
             Server obj = new Server();
             IServer stub = (IServer) UnicastRemoteObject.exportObject(obj, 1099);
@@ -45,9 +42,14 @@ public class Server implements IServer {
             registry.rebind("Server", stub);
 
             System.err.println("Server ready");
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             System.err.println("Server exception: " + e.getMessage());
-            e.printStackTrace();
         }
     }
+
+    @Override
+    public void cerrarSesion(Mozo m) {
+        gsu.cerrarSesion(m);
+    }
+
 }

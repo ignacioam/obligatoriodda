@@ -5,7 +5,8 @@
  */
 package appmozos;
 
-import restauranteserver.IServer;
+import Servicio.IServer;
+import dominio.entidades.Mozo;
 
 /**
  *
@@ -14,11 +15,20 @@ import restauranteserver.IServer;
 public class Sistema {
 
     private static IServer stub;
+    private static Mozo mozo;
 
     private Sistema() {
 
     }
 
+    public static Mozo getMozo() {
+        return mozo;
+    }
+
+    public static void setMozo(Mozo mozo) {
+        Sistema.mozo = mozo;
+    }   
+    
     public static IServer getService() {
         return stub;
     }

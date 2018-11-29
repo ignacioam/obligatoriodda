@@ -11,4 +11,6 @@ public interface UILogin {
     String getPassword();
     
     void mostrarMensaje(String msg);
+    
+    void cerrarForm();
 }

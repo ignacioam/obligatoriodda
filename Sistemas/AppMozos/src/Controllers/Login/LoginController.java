@@ -5,12 +5,13 @@
  */
 package Controllers.Login;
 
+import Presentacion.FrmMozos;
+import Servicio.IServer;
 import dominio.entidades.Mozo;
 import dominio.entidades.Usuario;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import restauranteserver.IServer;
 
 /**
  *
@@ -27,19 +28,19 @@ public class LoginController {
     }
 
     public void iniciarSesion() {
+        String username = ui.getUsername();
+        String password = ui.getPassword();
         try {
-            if (server.iniciarSesion(ui.getUsername(), ui.getPassword())) {
-                Usuario u = server.getUserPorUserName(ui.getUsername());
-                if(u instanceof Mozo){
-                    ui.mostrarMensaje("Niceeeeeee" + u.getNombre());
-                } else {
-                    ui.mostrarMensaje("Niceeeeeee");
-                }
+            Usuario u = server.getUserPorUserName(username);
+            if (server.iniciarSesion(username, password) && u instanceof Mozo) {
+                ui.cerrarForm();
+                new FrmMozos((Mozo) u).setVisible(true);
             } else {
-                ui.mostrarMensaje("NOOOOOOOOOOOO");
+                ui.mostrarMensaje("Ha ocurrido un error. Por favor, compruebe los datos.");
             }
         } catch (RemoteException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 }

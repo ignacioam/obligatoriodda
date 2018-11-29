@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Ignacio, Juan Pérez
+ * @author Juan, Ignacio
  */
 public class GestoraUsuarios {
 
@@ -20,16 +20,14 @@ public class GestoraUsuarios {
     /**
      * Precarga los usuarios
      */
-    public void cargarUsuarios(){
-        Usuario m2 = new Mozo("jperez", "perez", "Juan Pérez");
+    public void cargarUsuarios() {
+        Usuario m2 = new Mozo("jperez", "juanchi", "Juan Pérez");
         Usuario m1 = new Mozo("imartins", "nacho", "Ignacio Martins");
         colUsuarios.add(m1);
         colUsuarios.add(m2);
     }
-    
-    /**
-     * Singleton
-     */
+
+    //Singleton     
     private static GestoraUsuarios instance;
 
     public static GestoraUsuarios getInstance() {
@@ -40,7 +38,6 @@ public class GestoraUsuarios {
     }
 
     public Usuario getUserPorUserName(String username) {
-
         Usuario u = null;
         for (Usuario user : colUsuarios) {
             if (user.getUsername().equals(username)) {
@@ -52,11 +49,22 @@ public class GestoraUsuarios {
     }
 
     public boolean iniciarSesion(String username, String password) {
-        System.err.println(username);
         if (username == null || username.trim().length() == 0 || password == null || password.trim().length() == 0) {
             return false;
         }
         Usuario u = getUserPorUserName(username);
-        return u != null && u.getContrasenia().equals(password);
+        if (u != null && u.getContrasenia().equals(password) && !u.isLogueado()) {
+            u.setLogueado(true);
+            return true;
+        }
+        return false;
+    }
+
+    public void cerrarSesion(Usuario user) {
+        for (Usuario u : colUsuarios) {
+            if (u.getNombre().equals(user.getNombre())) {
+                u.setLogueado(false);
+            }
+        }
     }
 }

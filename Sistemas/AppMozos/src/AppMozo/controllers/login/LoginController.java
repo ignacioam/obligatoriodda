@@ -1,6 +1,6 @@
-package controllers.Login;
+package appmozo.controllers.login;
 
-import views.FrmMozos;
+import appmozo.views.FrmMozos;
 import entidades.Mozo;
 import entidades.Usuario;
 import java.rmi.RemoteException;
@@ -27,7 +27,7 @@ public class LoginController {
         String password = ui.getPassword();
         try {
             Usuario u = server.getUserPorUserName(username);
-            if (server.iniciarSesion(username, password) && u instanceof Mozo) {
+            if (u instanceof Mozo && server.iniciarSesion(username, password)) {
                 ui.cerrarForm();
                 new FrmMozos((Mozo) u).setVisible(true);
             } else {

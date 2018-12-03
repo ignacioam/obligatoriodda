@@ -1,4 +1,4 @@
-package app;
+package appmozo;
 
 import entidades.Mozo;
 import servicio.IService;
@@ -22,13 +22,13 @@ public class Sistema {
 
     public static void setMozo(Mozo mozo) {
         Sistema.mozo = mozo;
-    }   
-    
+    }
+
     public static IService getService() {
         return stub;
     }
 
-    public static void setService(IService stub1) {
-        stub = stub1;
+    public static void setService(IService stub) {
+        Sistema.stub = stub;
     }
 }

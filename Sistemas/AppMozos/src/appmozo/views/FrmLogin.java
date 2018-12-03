@@ -1,8 +1,8 @@
-package views;
+package appmozo.views;
 
-import controllers.Login.LoginController;
-import controllers.Login.UILogin;
-import app.Sistema;
+import appmozo.controllers.login.LoginController;
+import appmozo.controllers.login.UILogin;
+import appmozo.Sistema;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 

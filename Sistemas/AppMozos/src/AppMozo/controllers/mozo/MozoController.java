@@ -1,4 +1,4 @@
-package controllers.Login;
+package appmozo.controllers.mozo;
 
 import entidades.Mozo;
 import java.rmi.RemoteException;

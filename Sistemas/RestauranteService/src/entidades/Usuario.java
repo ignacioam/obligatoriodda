@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author juanc, Ignacio
+ * @author Juan, Ignacio
  */
 public abstract class Usuario implements Serializable {
 

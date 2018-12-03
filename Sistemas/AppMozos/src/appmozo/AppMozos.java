@@ -25,6 +25,7 @@ public class AppMozos {
     public static void main(String[] args) {
         try {
             DIRECCION = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Servidor";
+            DIRECCION = "rmi://192.168.2.127/Servidor";
             new AppMozos().conectarServidor();
         } catch (UnknownHostException ex) {
             Logger.getLogger(AppMozos.class.getName()).log(Level.SEVERE, null, ex);

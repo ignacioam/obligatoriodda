@@ -1,5 +1,6 @@
 package appmozo.controllers.login;
 
+import appmozo.Sistema;
 import appmozo.views.FrmMozos;
 import entidades.Mozo;
 import entidades.Usuario;
@@ -28,6 +29,7 @@ public class LoginController {
         try {
             Usuario u = server.getUserPorUserName(username);
             if (u instanceof Mozo && server.iniciarSesion(username, password)) {
+                Sistema.setMozo((Mozo) u);
                 ui.cerrarForm();
                 new FrmMozos((Mozo) u).setVisible(true);
             } else {
@@ -36,6 +38,13 @@ public class LoginController {
         } catch (RemoteException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
+    
+    public void cerrarSesion(){
+        try {
+            server.cerrarSesion(Sistema.getMozo());
+        } catch (RemoteException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

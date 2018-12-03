@@ -15,5 +15,5 @@ public interface IService extends Remote {
 
     Usuario getUserPorUserName(String username) throws RemoteException;
 
-    void cerrarSesion(Mozo m) throws RemoteException;
+    void cerrarSesion(Usuario u) throws RemoteException;
 }

@@ -31,8 +31,8 @@ public class Server implements IService {
     }
 
     @Override
-    public void cerrarSesion(Mozo m) {
-        gsu.cerrarSesion(m);
+    public void cerrarSesion(Usuario u) {
+        gsu.cerrarSesion(u);
     }
 
 }

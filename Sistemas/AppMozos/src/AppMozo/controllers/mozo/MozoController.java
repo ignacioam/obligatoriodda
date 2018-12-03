@@ -1,6 +1,7 @@
 package appmozo.controllers.mozo;
 
-import entidades.Mozo;
+import appmozo.Sistema;
+import entidades.Usuario;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,9 +20,9 @@ public class MozoController {
         this.ui = ui;
     }
 
-    public void cerrarSesion(Mozo m) {
+    public void cerrarSesion() {
         try {        
-            server.cerrarSesion(m);
+            server.cerrarSesion((Usuario) Sistema.getMozo());
         } catch (RemoteException ex) {
             Logger.getLogger(MozoController.class.getName()).log(Level.SEVERE, null, ex);
         }

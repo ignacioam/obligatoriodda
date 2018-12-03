@@ -19,6 +19,12 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         setLocationRelativeTo(null);
         controller = new MozoController(Sistema.getService(), this);
         this.mozo = mozo;
+         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                controller.cerrarSesion();
+            }
+        });
     }
 
     /**
@@ -84,8 +90,4 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public Mozo getMozo() {
-        return this.mozo;
-    }
-}
+ }

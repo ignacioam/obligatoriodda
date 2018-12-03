@@ -95,7 +95,7 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
         getContentPane().add(btnCerrar);
         btnCerrar.setBounds(870, 0, 30, 23);
 
-        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imgs/logologin.png"))); // NOI18N
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppMozo/views/resources/imgs/logologin.png"))); // NOI18N
         getContentPane().add(lblLogo);
         lblLogo.setBounds(409, 70, 90, 90);
 
@@ -105,7 +105,7 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
         getContentPane().add(lblMensaje);
         lblMensaje.setBounds(20, 470, 880, 16);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imgs/bglogin.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppMozo/views/resources/imgs/bglogin.png"))); // NOI18N
         getContentPane().add(lblBackground);
         lblBackground.setBounds(0, 0, 900, 520);
 
@@ -132,7 +132,7 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
-        System.exit(0);
+          System.exit(0);
     }//GEN-LAST:event_btnCerrarMouseClicked
 
     /**

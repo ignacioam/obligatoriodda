@@ -15,4 +15,6 @@ public interface IService extends Remote {
     Usuario getUserPorUserName(String username) throws RemoteException;
 
     void cerrarSesion(Usuario u) throws RemoteException;
+    
+    void agregarObserver(IRemoteObserver io) throws RemoteException;
 }

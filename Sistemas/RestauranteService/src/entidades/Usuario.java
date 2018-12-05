@@ -50,5 +50,10 @@ public abstract class Usuario implements Serializable {
 
     public void setLogueado(boolean logueado) {
         this.logueado = logueado;
-    }    
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario:" + username + " Nombre:" + nombre;
+    }   
 }

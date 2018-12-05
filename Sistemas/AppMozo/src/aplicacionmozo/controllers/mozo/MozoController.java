@@ -10,13 +10,14 @@ import entidades.Usuario;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import servicio.IRemoteObserver;
 import servicio.IService;
 
 /**
  *
  * @author Juanchi Perez
  */
-public class MozoController {
+public class MozoController implements IRemoteObserver{
 
     IService server;
     UIMozo ui;
@@ -32,5 +33,10 @@ public class MozoController {
         } catch (RemoteException ex) {
             Logger.getLogger(MozoController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void update(IService s, Object obj) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

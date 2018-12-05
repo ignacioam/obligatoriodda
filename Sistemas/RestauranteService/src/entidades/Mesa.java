@@ -33,4 +33,10 @@ public class Mesa {
         return this.abierta;
     }
 
+    @Override
+    public String toString() {
+        return "N° Mesa: " + numero + ", Mozo:" + mozo.getNombre() + ", Abierta: " + abierta + '}';
+    }
+
+    
 }

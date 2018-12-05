@@ -65,17 +65,25 @@ public class GestoraUsuarios {
     }
 
    public boolean cerrarSesion(Usuario user) {
-       Iterator<Usuario> colUsers = colUsuarioConectados.iterator();
-       while (colUsers.hasNext()) {
-            colUsers.next().setLogueado(false);
-            if (colUsers.next().getUsername().equals(user.getUsername())) {
-               colUsers.next().setLogueado(false);
-               colUsers.remove();
+       for (Usuario usu : colUsuarios) {
+           if(usu.getUsername().equals(user.getUsername())){
+               usu.setLogueado(false);
+               colUsuarioConectados.remove(usu);
                return true;
-            }
-            return true;
+           }
        }
        return false;
+       
+       
+//       Iterator<Usuario> colUsers = colUsuarioConectados.iterator();
+//       while (colUsers.hasNext()) {
+//            if (colUsers.next().getUsername().equals(user.getUsername())) {
+//               user.setLogueado(false);
+//               colUsers.remove();
+//               return true;
+//            }
+//       }
+//       return false;
    }
     
     public void addUsuarioConectado(Usuario u){

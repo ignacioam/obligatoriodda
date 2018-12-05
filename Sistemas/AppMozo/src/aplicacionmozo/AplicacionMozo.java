@@ -25,6 +25,7 @@ public class AplicacionMozo {
     public static void main(String[] args) {
         try {
             DIRECCION = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Servidor";
+            
             new AplicacionMozo().conectarServidor();
         } catch (UnknownHostException ex) {
             Logger.getLogger(AplicacionMozo.class.getName()).log(Level.SEVERE, null, ex);

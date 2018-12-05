@@ -40,7 +40,9 @@ public class Server implements IService {
 
     @Override
     public void cerrarSesion(Usuario u) {
-        gsu.cerrarSesion(u);
+        if(gsu.cerrarSesion(u)){
+         notificarObserver(Evento.USUARIO_DESCONECTADO);
+       }
     }
 
     @Override

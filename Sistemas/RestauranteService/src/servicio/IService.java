@@ -1,6 +1,5 @@
 package servicio;
 
-import entidades.Mozo;
 import entidades.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

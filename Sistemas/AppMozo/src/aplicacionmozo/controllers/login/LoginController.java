@@ -1,7 +1,7 @@
-package appmozo.controllers.login;
+package aplicacionmozo.controllers.login;
 
-import appmozo.Sistema;
-import appmozo.views.FrmMozos;
+import aplicacionmozo.Sistema;
+import aplicacionmozo.views.FrmMozos;
 import entidades.Mozo;
 import entidades.Usuario;
 import java.rmi.RemoteException;
@@ -11,10 +11,9 @@ import servicio.IService;
 
 /**
  *
- * @author Juan Perez, Ignacio Martins
+ * @author Juanchi Perez
  */
 public class LoginController {
-
     private UILogin ui;
     private IService server;
 
@@ -31,7 +30,7 @@ public class LoginController {
             if (u instanceof Mozo && server.iniciarSesion(username, password)) {
                 Sistema.setMozo((Mozo) u);
                 ui.cerrarForm();
-                new FrmMozos((Mozo) u).setVisible(true);
+                new FrmMozos().setVisible(true);
             } else {
                 ui.mostrarMensaje("Ha ocurrido un error. Por favor, compruebe los datos.");
             }

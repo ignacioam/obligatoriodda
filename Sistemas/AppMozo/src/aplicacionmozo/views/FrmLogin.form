@@ -130,7 +130,7 @@
     <Component class="javax.swing.JLabel" name="lblLogo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/AppMozo/views/resources/imgs/logologin.png"/>
+          <Image iconType="3" name="/aplicacionmozo/views/resources/imgs/logologin.png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -158,7 +158,7 @@
     <Component class="javax.swing.JLabel" name="lblBackground">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/AppMozo/views/resources/imgs/bglogin.png"/>
+          <Image iconType="3" name="/aplicacionmozo/views/resources/imgs/bglogin.png"/>
         </Property>
       </Properties>
       <Constraints>

@@ -1,4 +1,4 @@
-package appmozo.controllers.login;
+package aplicacionmozo.controllers.login;
 
 /**
  *

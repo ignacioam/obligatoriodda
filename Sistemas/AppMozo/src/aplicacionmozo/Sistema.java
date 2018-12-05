@@ -1,11 +1,16 @@
-package appmozo;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package aplicacionmozo;
 
 import entidades.Mozo;
 import servicio.IService;
 
 /**
  *
- * @author Ignacio Martins, Juanchi Perez
+ * @author Juan, Ignacio
  */
 public class Sistema {
 

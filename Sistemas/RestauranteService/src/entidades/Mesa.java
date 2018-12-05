@@ -8,12 +8,17 @@ public class Mesa {
 
     private int numero;
     private Mozo mozo;
-    private boolean abierto;
+    private boolean abierta;
 
-    public Mesa(int numero, Mozo mozo, boolean abierto) {
+    public Mesa(int numero, Mozo mozo) {
         this.numero = numero;
         this.mozo = mozo;
-        this.abierto = abierto;
+        this.abierta = false;
+    }
+    
+    public Mesa(int numero, boolean abierto) {
+        this.numero = numero;
+        this.abierta = abierto;
     }
 
     public int getNumero() {
@@ -24,8 +29,8 @@ public class Mesa {
         return this.mozo;
     }
 
-    public boolean getAbierto() {
-        return this.abierto;
+    public boolean isAbierta() {
+        return this.abierta;
     }
 
 }

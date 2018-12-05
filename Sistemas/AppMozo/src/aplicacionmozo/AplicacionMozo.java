@@ -1,6 +1,6 @@
-package appmozo;
+package aplicacionmozo;
 
-import appmozo.views.FrmLogin;
+import aplicacionmozo.views.FrmLogin;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
@@ -13,9 +13,9 @@ import servicio.IService;
 
 /**
  *
- * @author Juan Pérez, Ignacio Martins
+ * @author Juanchi Perez
  */
-public class AppMozos {
+public class AplicacionMozo {
 
     private static String DIRECCION;
 
@@ -25,10 +25,9 @@ public class AppMozos {
     public static void main(String[] args) {
         try {
             DIRECCION = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Servidor";
-            DIRECCION = "rmi://192.168.2.127/Servidor";
-            new AppMozos().conectarServidor();
+            new AplicacionMozo().conectarServidor();
         } catch (UnknownHostException ex) {
-            Logger.getLogger(AppMozos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AplicacionMozo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -40,7 +39,7 @@ public class AppMozos {
             Sistema.setService((IService) Naming.lookup(DIRECCION));
             new FrmLogin().setVisible(true);
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
-            Logger.getLogger(AppMozos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AplicacionMozo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

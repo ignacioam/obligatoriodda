@@ -1,6 +1,5 @@
 package restauranteserver;
 
-import entidades.Mozo;
 import entidades.Usuario;
 import gestoras.GestoraProductos;
 import gestoras.GestoraServicios;

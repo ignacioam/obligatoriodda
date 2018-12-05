@@ -3,6 +3,7 @@ package gestoras;
 import entidades.Mozo;
 import entidades.Usuario;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -57,16 +58,27 @@ public class GestoraUsuarios {
         Usuario u = getUserPorUserName(username);
         if (u != null && u.getContrasenia().equals(password) && !u.isLogueado()) {
             u.setLogueado(true);
+            addUsuarioConectado(u);
             return true;
         }
         return false;
     }
 
-    public void cerrarSesion(Usuario user) {
-        for (Usuario u : colUsuarios) {
-            if (u.getNombre().equals(user.getNombre())) {
-                u.setLogueado(false);
-            }
-        }
+   public boolean cerrarSesion(Usuario user) {
+       Iterator<Usuario> colUsers = colUsuarioConectados.iterator();
+       while (colUsers.hasNext()) {
+           colUsers.next().setLogueado(false);
+           colUsers.remove();
+           return true;
+       }
+       return false;
+   }
+    
+    public void addUsuarioConectado(Usuario u){
+        colUsuarioConectados.add(u);
+    }
+    
+    public ArrayList<Usuario> obtenerUsuariosConectados(){
+        return new ArrayList<>(colUsuarioConectados);
     }
 }

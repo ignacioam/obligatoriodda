@@ -3,6 +3,7 @@ package servicio;
 import entidades.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,4 +18,6 @@ public interface IService extends Remote {
     void cerrarSesion(Usuario u) throws RemoteException;
     
     void agregarObserver(IRemoteObserver io) throws RemoteException;
+    
+    ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException;
 }

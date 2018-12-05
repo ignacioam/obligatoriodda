@@ -7,8 +7,10 @@ import aplicacionmozo.TableMesas.MesaCellRenderer;
 import aplicacionmozo.TableMesas.MesaTableModel;
 import entidades.Mesa;
 import entidades.Mozo;
+import entidades.Usuario;
 import java.awt.Color;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author Juan. Ignacio
  */
-public class FrmMozos extends javax.swing.JFrame implements UIMozo {
+public class FrmMozos extends javax.swing.JFrame implements UIMozo{
 
     private MozoController controller;
     private Mozo mozo;
@@ -30,6 +32,7 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         mozo = Sistema.getMozo();
         lblMozo.setText(mozo.getNombre());
         configurarListadoDeMesas();
+        listarUsuarios(Sistema.getService().obtenerUsuariosConectados());
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -580,5 +583,11 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
     private javax.swing.JPanel panelTransferirMesa;
     private javax.swing.JSeparator separador;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void listarUsuarios(ArrayList<Usuario> colUsers) {
+      jlstMozos.setListData(colUsers.toArray());
+    }
+
 
 }

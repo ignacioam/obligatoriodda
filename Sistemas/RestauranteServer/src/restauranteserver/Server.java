@@ -8,6 +8,7 @@ import gestoras.GestoraUsuarios;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import servicio.Evento;
 import servicio.IRemoteObserver;
 import servicio.IService;
 
@@ -25,7 +26,11 @@ public class Server implements IService {
     
     @Override
     public boolean iniciarSesion(String username, String password) throws RemoteException {
-        return gsu.iniciarSesion(username, password);
+        if(gsu.iniciarSesion(username, password)){
+            notificarObserver(Evento.USUARIO_CONECTADO);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -52,5 +57,10 @@ public class Server implements IService {
                 it.remove();
             }
         }
+    }
+
+    @Override
+    public ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException {
+        return gsu.obtenerUsuariosConectados();
     }
 }

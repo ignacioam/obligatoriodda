@@ -11,9 +11,11 @@ import java.util.ArrayList;
 public class GestoraUsuarios {
 
     private ArrayList<Usuario> colUsuarios;
+    private ArrayList<Usuario> colUsuarioConectados;
 
     private GestoraUsuarios() {
         colUsuarios = new ArrayList<>();
+        colUsuarioConectados = new ArrayList<>();
         cargarUsuarios();
     }
 

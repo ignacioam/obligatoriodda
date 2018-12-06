@@ -1,6 +1,8 @@
 package restauranteserver;
 
+import entidades.Mesa;
 import entidades.Usuario;
+import gestoras.GestoraMesas;
 import gestoras.GestoraProductos;
 import gestoras.GestoraServicios;
 import gestoras.GestoraUnidadProcesadora;
@@ -18,15 +20,25 @@ import servicio.IService;
  */
 public class Server implements IService {
 
-    private GestoraProductos gsp = GestoraProductos.getInstance();
-    private GestoraServicios gss = GestoraServicios.getInstance();
-    private GestoraUnidadProcesadora gsup = GestoraUnidadProcesadora.getInstance();
-    private GestoraUsuarios gsu = GestoraUsuarios.getInstance();
-    private ArrayList<IRemoteObserver> colObservers = new ArrayList<>();
-    
+    private GestoraProductos gsp;
+    private GestoraServicios gss;
+    private GestoraUnidadProcesadora gsup;
+    private GestoraUsuarios gsu;
+    private GestoraMesas gsm;
+    private ArrayList<IRemoteObserver> colObservers;
+
+    public Server() {
+        gsp = GestoraProductos.getInstance();
+        gss = GestoraServicios.getInstance();
+        gsup = GestoraUnidadProcesadora.getInstance();
+        gsu = GestoraUsuarios.getInstance();
+        gsm = GestoraMesas.getInstance();
+        colObservers = new ArrayList<>();
+    }
+
     @Override
     public boolean iniciarSesion(String username, String password) throws RemoteException {
-        if(gsu.iniciarSesion(username, password)){
+        if (gsu.iniciarSesion(username, password)) {
             notificarObserver(Evento.USUARIO_CONECTADO);
             return true;
         }
@@ -39,10 +51,10 @@ public class Server implements IService {
     }
 
     @Override
-    public void cerrarSesion(Usuario u) {
-        if(gsu.cerrarSesion(u)){
-         notificarObserver(Evento.USUARIO_DESCONECTADO);
-       }
+    public void cerrarSesion(String username) {
+        if (gsu.cerrarSesion(username)) {
+            notificarObserver(Evento.USUARIO_DESCONECTADO);
+        }
     }
 
     @Override
@@ -50,7 +62,7 @@ public class Server implements IService {
         colObservers.add(io);
     }
 
-    public void notificarObserver(Object obj){
+    public void notificarObserver(Object obj) {
         Iterator<IRemoteObserver> it = colObservers.iterator();
         while (it.hasNext()) {
             try {
@@ -64,5 +76,10 @@ public class Server implements IService {
     @Override
     public ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException {
         return gsu.obtenerUsuariosConectados();
+    }
+
+    @Override
+    public ArrayList<Mesa> obtenerMesasDeMozo(String username) throws RemoteException {
+        return gsm.getMesasDeMozo(username);
     }
 }

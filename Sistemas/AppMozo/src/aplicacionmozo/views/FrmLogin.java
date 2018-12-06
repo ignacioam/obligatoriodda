@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 
 /**
  *
- * @author Juanchi Perez, Ignacio Martins
+ * @author Juan, Ignacio
  */
 public class FrmLogin extends javax.swing.JFrame implements UILogin {
 

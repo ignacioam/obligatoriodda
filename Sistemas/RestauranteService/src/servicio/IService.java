@@ -1,5 +1,6 @@
 package servicio;
 
+import entidades.Mesa;
 import entidades.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -15,9 +16,11 @@ public interface IService extends Remote {
 
     Usuario getUserPorUserName(String username) throws RemoteException;
 
-    void cerrarSesion(Usuario u) throws RemoteException;
+    void cerrarSesion(String username) throws RemoteException;
     
     void agregarObserver(IRemoteObserver io) throws RemoteException;
     
     ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException;
+    
+    ArrayList<Mesa> obtenerMesasDeMozo(String username) throws RemoteException;
 }

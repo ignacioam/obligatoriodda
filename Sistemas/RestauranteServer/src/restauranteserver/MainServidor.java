@@ -45,7 +45,7 @@ public class MainServidor {
             String direccionIp = (InetAddress.getLocalHost()).toString();
             System.out.println("*************| INFO SERVER |*************");
             System.out.println("* Estado: ON\t\t\t\t*");
-            System.out.println("* IP: " + direccionIp + "\t\t*");
+            System.out.println("* IP: " + direccionIp + "\t*");
             System.out.println("* PORT: " + PUERTO + "\t\t\t\t*");
             System.out.println("*****************************************");
 

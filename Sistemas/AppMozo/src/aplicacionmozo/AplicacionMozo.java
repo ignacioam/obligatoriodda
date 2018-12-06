@@ -13,7 +13,7 @@ import servicio.IService;
 
 /**
  *
- * @author Juanchi Perez
+ * @author Juan, Ignacio
  */
 public class AplicacionMozo {
 
@@ -25,7 +25,7 @@ public class AplicacionMozo {
     public static void main(String[] args) {
         try {
             DIRECCION = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/Servidor";
-            
+            //DIRECCION = "rmi://192.168.2.127/Servidor";
             new AplicacionMozo().conectarServidor();
         } catch (UnknownHostException ex) {
             Logger.getLogger(AplicacionMozo.class.getName()).log(Level.SEVERE, null, ex);

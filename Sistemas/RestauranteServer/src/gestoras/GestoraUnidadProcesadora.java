@@ -10,14 +10,12 @@ import java.util.ArrayList;
 public class GestoraUnidadProcesadora {
 
     private ArrayList<Usuario> colUnidadesProcesadoras;
-
-    private GestoraUnidadProcesadora() {
+   
+    //Singleton    
+     private GestoraUnidadProcesadora() {
         colUnidadesProcesadoras = new ArrayList<>();
     }
-
-    /**
-     * Singleton
-     */
+    
     private static GestoraUnidadProcesadora instance;
 
     public static GestoraUnidadProcesadora getInstance() {

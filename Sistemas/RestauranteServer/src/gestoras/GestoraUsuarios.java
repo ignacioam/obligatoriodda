@@ -1,15 +1,16 @@
 package gestoras;
 
+import entidades.Mesa;
 import entidades.Mozo;
 import entidades.Usuario;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
  * @author Juan, Ignacio
  */
-public class GestoraUsuarios {
+public class GestoraUsuarios implements Serializable {
 
     private ArrayList<Usuario> colUsuarios;
     private ArrayList<Usuario> colUsuarioConectados;
@@ -24,10 +25,50 @@ public class GestoraUsuarios {
      * Precarga los usuarios
      */
     public void cargarUsuarios() {
-        Usuario m2 = new Mozo("jperez", "juanchi", "Juan Pérez");
-        Usuario m1 = new Mozo("imartins", "nacho", "Ignacio Martins");
+        Mozo m1 = new Mozo("jperez", "juanchi", "Juan Pérez");
+        Mozo m2 = new Mozo("imartins", "nacho", "Ignacio Martins");
+        Mozo m3 = new Mozo("tvandelli", "tomas", "Tomas Vandelli");
+        Mozo m4 = new Mozo("fspasiuk", "fernando", "Fernando Spasiuk");
+        Mozo m5 = new Mozo("sconde", "sebac", "Sebastian Conde");
+
+        ArrayList<Mesa> col = new ArrayList<Mesa>() {
+            {
+                add(new Mesa(m5));
+                add(new Mesa(m3));
+                add(new Mesa(m5));
+                add(new Mesa(m2));
+                add(new Mesa(m1));
+                add(new Mesa(m4));
+                add(new Mesa(m1));
+                add(new Mesa(m5));
+                add(new Mesa(m2));
+                add(new Mesa(m5));
+                add(new Mesa(m2));
+                add(new Mesa(m1));
+                add(new Mesa(m3));
+                add(new Mesa(m4));
+                add(new Mesa(m4));
+                add(new Mesa(m5));
+                add(new Mesa(m4));
+                add(new Mesa(m3));
+                add(new Mesa(m4));
+                add(new Mesa(m5));
+                add(new Mesa(m3));
+                add(new Mesa(m4));
+                add(new Mesa(m1));
+                add(new Mesa(m2));
+                add(new Mesa(m4));
+                add(new Mesa(m5));
+                add(new Mesa(m1));
+            }
+        };
+
         colUsuarios.add(m1);
         colUsuarios.add(m2);
+        colUsuarios.add(m3);
+        colUsuarios.add(m4);
+        colUsuarios.add(m5);
+        GestoraMesas.getInstance().setColMesas(col);
     }
 
     //Singleton     
@@ -64,33 +105,22 @@ public class GestoraUsuarios {
         return false;
     }
 
-   public boolean cerrarSesion(Usuario user) {
-       for (Usuario usu : colUsuarios) {
-           if(usu.getUsername().equals(user.getUsername())){
-               usu.setLogueado(false);
-               colUsuarioConectados.remove(usu);
-               return true;
-           }
-       }
-       return false;
-       
-       
-//       Iterator<Usuario> colUsers = colUsuarioConectados.iterator();
-//       while (colUsers.hasNext()) {
-//            if (colUsers.next().getUsername().equals(user.getUsername())) {
-//               user.setLogueado(false);
-//               colUsers.remove();
-//               return true;
-//            }
-//       }
-//       return false;
-   }
-    
-    public void addUsuarioConectado(Usuario u){
+    public boolean cerrarSesion(String nick) {
+        for (Usuario usu : colUsuarios) {
+            if (usu.getUsername().equals(nick)) {
+                usu.setLogueado(false);
+                colUsuarioConectados.remove(usu);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addUsuarioConectado(Usuario u) {
         colUsuarioConectados.add(u);
     }
-    
-    public ArrayList<Usuario> obtenerUsuariosConectados(){
+
+    public ArrayList<Usuario> obtenerUsuariosConectados() {
         return new ArrayList<>(colUsuarioConectados);
     }
 }

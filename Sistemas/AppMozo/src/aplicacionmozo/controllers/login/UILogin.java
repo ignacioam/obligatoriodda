@@ -2,7 +2,7 @@ package aplicacionmozo.controllers.login;
 
 /**
  *
- * @author Juan Perez, Ignacio Martins
+ * @author Juan, Ignacio
  */
 public interface UILogin {
 

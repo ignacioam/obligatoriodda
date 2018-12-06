@@ -3,8 +3,8 @@ package aplicacionmozo.views;
 import aplicacionmozo.controllers.mozo.MozoController;
 import aplicacionmozo.controllers.mozo.UIMozo;
 import aplicacionmozo.Sistema;
-import aplicacionmozo.TableMesas.MesaCellRenderer;
-import aplicacionmozo.TableMesas.MesaTableModel;
+import aplicacionmozo.tablemesas.MesaCellRenderer;
+import aplicacionmozo.tablemesas.MesaTableModel;
 import entidades.Mesa;
 import entidades.Mozo;
 import entidades.Usuario;
@@ -20,7 +20,7 @@ import javax.swing.ListSelectionModel;
  *
  * @author Juan. Ignacio
  */
-public class FrmMozos extends javax.swing.JFrame implements UIMozo{
+public class FrmMozos extends javax.swing.JFrame implements UIMozo {
 
     private MozoController controller;
     private Mozo mozo;
@@ -300,6 +300,11 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo{
         jtbMesas.setSurrendersFocusOnKeystroke(true);
         jtbMesas.getTableHeader().setResizingAllowed(false);
         jtbMesas.getTableHeader().setReorderingAllowed(false);
+        jtbMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtbMesasMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbMesas);
 
         btnCerrarLstMesas.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
@@ -479,20 +484,17 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo{
         optLogout.setBackground(new Color(26, 91, 176));
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
+    private void jtbMesasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMesasMousePressed
+        if (evt.getClickCount() == 2 && jtbMesas.getValueAt(jtbMesas.getSelectedRow(), jtbMesas.getSelectedColumn()) != null) {
+            Mesa mesa = (Mesa) jtbMesas.getValueAt(jtbMesas.getSelectedRow(), jtbMesas.getSelectedColumn());
+            JOptionPane.showMessageDialog(null, "Mesa " + mesa.getNumero(), "MESA SELECCIONADA", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jtbMesasMousePressed
+
     private void configurarListadoDeMesas() {
         btnTransefirMesas.setBackground(new Color(76, 132, 203));
         optMesas.setBackground(new Color(26, 91, 176));
         btnMesas.setBackground(new Color(0, 88, 170));
-
-        Mesa[][] mesas = {{new Mesa(1, true), new Mesa(2, false), new Mesa(3, false)}, {new Mesa(4, true), new Mesa(5, false), new Mesa(6, true)}, {new Mesa(7, true), new Mesa(8, false), new Mesa(9, false)}};
-
-        MesaTableModel modelo = new MesaTableModel(mesas);
-        jtbMesas.setModel(modelo);
-        jtbMesas.setDefaultRenderer(Object.class, new MesaCellRenderer());
-        jtbMesas.setRowHeight(200);
-        jtbMesas.setCellSelectionEnabled(true);
-        jtbMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         panelTransferirMesa.hide();
         panelMesas.show();
     }
@@ -586,8 +588,17 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo{
 
     @Override
     public void listarUsuarios(ArrayList<Usuario> colUsers) {
-      jlstMozos.setListData(colUsers.toArray());
+        jlstMozos.setListData(colUsers.toArray());
     }
 
+    @Override
+    public void listarMesas(Mesa[][] mesas) {
+        MesaTableModel modelo = new MesaTableModel(mesas);
+        jtbMesas.setModel(modelo);
+        jtbMesas.setDefaultRenderer(Object.class, new MesaCellRenderer());
+        jtbMesas.setRowHeight(200);
+        jtbMesas.setCellSelectionEnabled(true);
+        jtbMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
 
 }

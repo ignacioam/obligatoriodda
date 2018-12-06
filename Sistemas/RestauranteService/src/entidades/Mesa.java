@@ -1,24 +1,22 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ignacio, Juan
  */
-public class Mesa {
+public class Mesa implements Serializable {
 
+    private static int numMesa = 0;
     private int numero;
     private Mozo mozo;
     private boolean abierta;
 
-    public Mesa(int numero, Mozo mozo) {
-        this.numero = numero;
+    public Mesa(Mozo mozo) {
+        this.numero = ++numMesa;
         this.mozo = mozo;
         this.abierta = false;
-    }
-    
-    public Mesa(int numero, boolean abierto) {
-        this.numero = numero;
-        this.abierta = abierto;
     }
 
     public int getNumero() {
@@ -38,5 +36,4 @@ public class Mesa {
         return "N° Mesa: " + numero + ", Mozo:" + mozo.getNombre() + ", Abierta: " + abierta + '}';
     }
 
-    
 }

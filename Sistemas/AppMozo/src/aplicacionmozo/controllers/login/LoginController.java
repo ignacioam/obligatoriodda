@@ -11,9 +11,10 @@ import servicio.IService;
 
 /**
  *
- * @author Juanchi Perez
+ * @author Juan, Ignacio
  */
 public class LoginController {
+
     private UILogin ui;
     private IService server;
 
@@ -34,14 +35,6 @@ public class LoginController {
             } else {
                 ui.mostrarMensaje("Ha ocurrido un error. Por favor, compruebe los datos.");
             }
-        } catch (RemoteException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void cerrarSesion(){
-        try {
-            server.cerrarSesion(Sistema.getMozo());
         } catch (RemoteException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

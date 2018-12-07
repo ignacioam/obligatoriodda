@@ -5,6 +5,8 @@
  */
 package entidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ignacio
@@ -13,7 +15,21 @@ public class Preferenciales implements TipoCliente {
 
     @Override
     public float descuento(Servicio s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        float total = s.calcularTotal() - descuentoPorAgua(s.getLineas());
+        if(total > 2000){
+            return total-(total*0.05f);
+        }
+        return total;
+    }
+    
+    private float descuentoPorAgua(ArrayList<LineaServicio> ls){
+        float totalAgua = 0;
+        for(LineaServicio lp : ls){
+           if(lp.getProducto().getNombre() == "Agua Mineral"){
+               totalAgua+= lp.getProducto().getPrecioUnitario();
+           }
+        }
+        return totalAgua;       
     }
 
 }

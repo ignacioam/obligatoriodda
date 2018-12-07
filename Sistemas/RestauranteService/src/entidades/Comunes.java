@@ -8,7 +8,12 @@ public class Comunes implements TipoCliente {
 
     @Override
     public float descuento(Servicio s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        float totalAgua = 0;
+        for(LineaServicio lp : s.getLineas()){
+           if(lp.getProducto().getNombre() == "Café"){
+               totalAgua+= lp.getProducto().getPrecioUnitario();
+           }
+        }
+        return s.calcularTotal()-totalAgua;
     }
-
 }

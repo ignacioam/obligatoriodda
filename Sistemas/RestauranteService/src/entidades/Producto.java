@@ -8,11 +8,11 @@ public class Producto {
 
     private int codigo;
     private String nombre;
-    private String precioUnitario;
+    private float precioUnitario;
     private int stock;
     private UnidadProcesadora upp;
 
-    public Producto(int codigo, String nombre, String precioUnitario, int stock, UnidadProcesadora upp) {
+    public Producto(int codigo, String nombre, float precioUnitario, int stock, UnidadProcesadora upp) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precioUnitario = precioUnitario;
@@ -36,11 +36,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getPrecioUnitario() {
+    public float getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(String precioUnitario) {
+    public void setPrecioUnitario(float precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 

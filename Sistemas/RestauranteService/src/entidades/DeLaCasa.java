@@ -8,7 +8,6 @@ public class DeLaCasa implements TipoCliente {
 
     @Override
     public float descuento(Servicio s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return s.calcularTotal()-500 < 0 ? 0 : s.calcularTotal() -500;
     }
-
 }

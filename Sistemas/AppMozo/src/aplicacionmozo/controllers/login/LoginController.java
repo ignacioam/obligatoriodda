@@ -27,11 +27,13 @@ public class LoginController {
         String username = ui.getUsername();
         String password = ui.getPassword();
         try {
-            Usuario u = server.getUserPorUserName(username);
-            if (u instanceof Mozo && server.iniciarSesion(username, password)) {
-                Sistema.setMozo((Mozo) u);
-                ui.cerrarForm();
-                new FrmMozos().setVisible(true);
+            if (server.iniciarSesion(username, password)) {
+                Usuario u = server.getUserPorUserName(username);
+                if (u instanceof Mozo) {
+                    Sistema.setMozo((Mozo) u);
+                    ui.cerrarForm();
+                    new FrmMozos().setVisible(true);
+                }
             } else {
                 ui.mostrarMensaje("Ha ocurrido un error. Por favor, compruebe los datos.");
             }

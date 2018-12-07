@@ -32,7 +32,6 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         mozo = Sistema.getMozo();
         lblMozo.setText(mozo.getNombre());
         configurarListadoDeMesas();
-        listarUsuarios(Sistema.getService().obtenerUsuariosConectados());
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -487,7 +486,12 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
     private void jtbMesasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMesasMousePressed
         if (evt.getClickCount() == 2 && jtbMesas.getValueAt(jtbMesas.getSelectedRow(), jtbMesas.getSelectedColumn()) != null) {
             Mesa mesa = (Mesa) jtbMesas.getValueAt(jtbMesas.getSelectedRow(), jtbMesas.getSelectedColumn());
-            JOptionPane.showMessageDialog(null, "Mesa " + mesa.getNumero(), "MESA SELECCIONADA", JOptionPane.INFORMATION_MESSAGE);
+            if (mesa.isAbierta()) {
+                JOptionPane.showMessageDialog(null, "Mesa " + mesa.getNumero(), "MESA SELECCIONADA", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                mesa.abrir();
+                controller.abrirMesa(mesa.getNumero());
+            }
         }
     }//GEN-LAST:event_jtbMesasMousePressed
 
@@ -599,6 +603,11 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         jtbMesas.setRowHeight(200);
         jtbMesas.setCellSelectionEnabled(true);
         jtbMesas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    @Override
+    public void listarMesasTransferencia(ArrayList<Mesa> mesas) {
+        jlstMesas.setListData(mesas.toArray());
     }
 
 }

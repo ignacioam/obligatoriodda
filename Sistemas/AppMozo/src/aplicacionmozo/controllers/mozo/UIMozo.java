@@ -12,5 +12,7 @@ public interface UIMozo {
 
     void listarUsuarios(ArrayList<Usuario> colUsers);
 
-    public void listarMesas(Mesa[][] mesas);
+    void listarMesas(Mesa[][] mesas);
+    
+    void listarMesasTransferencia(ArrayList<Mesa> mesas);
 }

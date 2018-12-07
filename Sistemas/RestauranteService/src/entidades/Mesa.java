@@ -12,6 +12,7 @@ public class Mesa implements Serializable {
     private int numero;
     private Mozo mozo;
     private boolean abierta;
+    private Servicio servicio;
 
     public Mesa(Mozo mozo) {
         this.numero = ++numMesa;
@@ -33,7 +34,24 @@ public class Mesa implements Serializable {
 
     @Override
     public String toString() {
-        return "N° Mesa: " + numero + ", Mozo:" + mozo.getNombre() + ", Abierta: " + abierta + '}';
+        return "N° Mesa: " + numero + ", Mozo:" + mozo.getNombre() + ", Abierta: " + (abierta ? "Si" : "No");
     }
 
+    public boolean abrir() {
+        if (!this.abierta) {
+            this.abierta = true;
+            this.servicio = new Servicio();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cerrar() {
+        if (this.abierta) {
+            this.abierta = false;
+            this.servicio = null;
+            return true;
+        }
+        return false;
+    }
 }

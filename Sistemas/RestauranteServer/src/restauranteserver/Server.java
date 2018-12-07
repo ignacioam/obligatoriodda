@@ -1,6 +1,5 @@
 package restauranteserver;
 
-import entidades.Mesa;
 import entidades.Usuario;
 import gestoras.GestoraMesas;
 import gestoras.GestoraProductos;
@@ -79,7 +78,9 @@ public class Server implements IService {
     }
 
     @Override
-    public ArrayList<Mesa> obtenerMesasDeMozo(String username) throws RemoteException {
-        return gsm.getMesasDeMozo(username);
+    public void abrirMesa(int m) throws RemoteException {
+        if (gsm.abrirMesa(m)) {
+            notificarObserver(Evento.ABRIR_MESA);
+        }
     }
 }

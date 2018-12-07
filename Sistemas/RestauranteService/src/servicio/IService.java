@@ -22,5 +22,5 @@ public interface IService extends Remote {
     
     ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException;
     
-    ArrayList<Mesa> obtenerMesasDeMozo(String username) throws RemoteException;
+    void abrirMesa(int mesa) throws RemoteException;
 }

@@ -11,16 +11,6 @@ public class GestoraMesas {
 
     private ArrayList<Mesa> colMesas;
 
-    public ArrayList<Mesa> getMesasDeMozo(String username) {
-        ArrayList<Mesa> aux = new ArrayList<>();
-        for (Mesa mesa : colMesas) {
-            if (mesa.getMozo().getUsername().equals(username)) {
-                aux.add(mesa);
-            }
-        }
-        return aux;
-    }
-
     //Singleton
     private GestoraMesas() {
         this.colMesas = new ArrayList<>();
@@ -35,7 +25,25 @@ public class GestoraMesas {
         return instance;
     }
 
-    public void setColMesas(ArrayList<Mesa> col) {
-        this.colMesas = col;
+    public void addMesa(Mesa mesa) {
+        mesa.getMozo().addMesa(mesa);
+        colMesas.add(mesa);
+    }
+
+    public Mesa obtenerMesaPorNumero(int mesa) {
+        for (Mesa m : colMesas) {
+            if (m.getNumero() == mesa) {
+                return m;
+            }
+        }
+        return null;
+    }
+
+    public boolean abrirMesa(int mesa) {
+        Mesa m = obtenerMesaPorNumero(mesa);
+        if (m != null && m.abrir()) {
+            return true;
+        }
+        return false;
     }
 }

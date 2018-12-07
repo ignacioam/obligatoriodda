@@ -31,44 +31,48 @@ public class GestoraUsuarios implements Serializable {
         Mozo m4 = new Mozo("fspasiuk", "fernando", "Fernando Spasiuk");
         Mozo m5 = new Mozo("sconde", "sebac", "Sebastian Conde");
 
-        ArrayList<Mesa> col = new ArrayList<Mesa>() {
-            {
-                add(new Mesa(m5));
-                add(new Mesa(m3));
-                add(new Mesa(m5));
-                add(new Mesa(m2));
-                add(new Mesa(m1));
-                add(new Mesa(m4));
-                add(new Mesa(m1));
-                add(new Mesa(m5));
-                add(new Mesa(m2));
-                add(new Mesa(m5));
-                add(new Mesa(m2));
-                add(new Mesa(m1));
-                add(new Mesa(m3));
-                add(new Mesa(m4));
-                add(new Mesa(m4));
-                add(new Mesa(m5));
-                add(new Mesa(m4));
-                add(new Mesa(m3));
-                add(new Mesa(m4));
-                add(new Mesa(m5));
-                add(new Mesa(m3));
-                add(new Mesa(m4));
-                add(new Mesa(m1));
-                add(new Mesa(m2));
-                add(new Mesa(m4));
-                add(new Mesa(m5));
-                add(new Mesa(m1));
-            }
-        };
-
+        GestoraMesas.getInstance().addMesa(new Mesa(m5));
+        GestoraMesas.getInstance().addMesa(new Mesa(m1));
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));
+        GestoraMesas.getInstance().addMesa(new Mesa(m1));
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));
+        GestoraMesas.getInstance().addMesa(new Mesa(m1));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));       
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));        
+        GestoraMesas.getInstance().addMesa(new Mesa(m5));
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));
+        GestoraMesas.getInstance().addMesa(new Mesa(m5));
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));
+        GestoraMesas.getInstance().addMesa(new Mesa(m3)); 
+        GestoraMesas.getInstance().addMesa(new Mesa(m1));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));        
+        GestoraMesas.getInstance().addMesa(new Mesa(m1));
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));    
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));
+        GestoraMesas.getInstance().addMesa(new Mesa(m1));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));
+        GestoraMesas.getInstance().addMesa(new Mesa(m4));               
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));
+        GestoraMesas.getInstance().addMesa(new Mesa(m5));
+        GestoraMesas.getInstance().addMesa(new Mesa(m3));       
+        GestoraMesas.getInstance().addMesa(new Mesa(m2));    
+        GestoraMesas.getInstance().addMesa(new Mesa(m5));
+        GestoraMesas.getInstance().addMesa(new Mesa(m5));
+        
         colUsuarios.add(m1);
         colUsuarios.add(m2);
         colUsuarios.add(m3);
         colUsuarios.add(m4);
         colUsuarios.add(m5);
-        GestoraMesas.getInstance().setColMesas(col);
     }
 
     //Singleton     

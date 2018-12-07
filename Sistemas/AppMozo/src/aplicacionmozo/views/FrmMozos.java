@@ -489,7 +489,6 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
             if (mesa.isAbierta()) {
                 JOptionPane.showMessageDialog(null, "Mesa " + mesa.getNumero(), "MESA SELECCIONADA", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                mesa.abrir();
                 controller.abrirMesa(mesa.getNumero());
             }
         }

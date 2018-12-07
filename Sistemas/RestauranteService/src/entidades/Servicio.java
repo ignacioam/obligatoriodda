@@ -1,12 +1,13 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Ignacio, Juan
  */
-public class Servicio {
+public class Servicio implements Serializable{
 
     private Cliente cliente;
     private ArrayList<LineaServicio> colLineas;

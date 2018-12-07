@@ -2,6 +2,7 @@ package aplicacionmozo.controllers.mozo;
 
 import aplicacionmozo.Sistema;
 import entidades.Mesa;
+import entidades.Mozo;
 import entidades.Usuario;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -54,7 +55,9 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
         } else if (obj == Evento.MESA_TRANSFERIDA) {
 
         } else if (obj == Evento.ABRIR_MESA) {
+            Sistema.setMozo((Mozo) s.getUserPorUserName(Sistema.getMozo().getUsername()));
             ui.listarMesas(obtenerMatrizDeMesas(Sistema.getMozo().getMesas()));
+            ui.listarMesasTransferencia(Sistema.getMozo().getMesas());
         }
     }
 

@@ -37,6 +37,22 @@ public class Mesa implements Serializable {
         return "N° Mesa: " + numero + ", Mozo:" + mozo.getNombre() + ", Abierta: " + (abierta ? "Si" : "No");
     }
 
+    public static int getNumMesa() {
+        return numMesa;
+    }
+
+    public static void setNumMesa(int numMesa) {
+        Mesa.numMesa = numMesa;
+    }
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+    
     public boolean abrir() {
         if (!this.abierta) {
             this.abierta = true;

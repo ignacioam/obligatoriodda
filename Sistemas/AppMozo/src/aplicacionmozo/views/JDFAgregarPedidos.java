@@ -5,21 +5,29 @@
  */
 package aplicacionmozo.views;
 
+import aplicacionmozo.Sistema;
+import aplicacionmozo.controllers.servicio.ServicioController;
+import aplicacionmozo.controllers.servicio.UIServicio;
+import entidades.Cliente;
 import entidades.LineaServicio;
+import entidades.Mesa;
 import entidades.Producto;
 
 /**
  *
  * @author Ignacio
  */
-public class JDFAgregarPedidos extends javax.swing.JDialog {
+public class JDFAgregarPedidos extends javax.swing.JDialog implements UIServicio{
 
+    private ServicioController controller;
+    
     /**
      * Creates new form JDFAgregarPedidos
      */
-    public JDFAgregarPedidos(java.awt.Frame parent, boolean modal) {
+    public JDFAgregarPedidos(java.awt.Frame parent, boolean modal, Mesa m) {
         super(parent, modal);
         initComponents();
+        controller = new ServicioController(Sistema.getService(), this, m); 
     }
 
     /**
@@ -42,6 +50,9 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstListarLineaPedidos = new javax.swing.JList<>();
         lblTotal = new javax.swing.JLabel();
+        btnCerrarMesa = new javax.swing.JButton();
+        jcbSelectCliente = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,7 +62,7 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Agregar pedidos");
+        jLabel1.setText("Agregar pedidos - Mesa: 2");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -59,8 +70,8 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(560, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,6 +90,8 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Seleccionar cantidad");
+
+        numCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
         btnAplicarPedido.setBackground(new java.awt.Color(98, 160, 240));
         btnAplicarPedido.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
@@ -100,6 +113,23 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
         lblTotal.setText("Total: 45448");
         lblTotal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
+        btnCerrarMesa.setBackground(new java.awt.Color(98, 160, 240));
+        btnCerrarMesa.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        btnCerrarMesa.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrarMesa.setText("Cerrar mesa");
+        btnCerrarMesa.setBorder(null);
+        btnCerrarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarMesaActionPerformed(evt);
+            }
+        });
+
+        jcbSelectCliente.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("Seleccionar cliente");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -109,42 +139,57 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jcbSelectProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbSelectProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
                             .addGap(88, 88, 88)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(numCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(81, 81, 81)
                                     .addComponent(btnAplicarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jcbSelectCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCerrarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jcbSelectCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jcbSelectProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAplicarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(numCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbSelectProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAplicarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCerrarMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,6 +209,10 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
     private void btnAplicarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarPedidoActionPerformed
 
     }//GEN-LAST:event_btnAplicarPedidoActionPerformed
+
+    private void btnCerrarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarMesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarMesaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,7 +244,7 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDFAgregarPedidos dialog = new JDFAgregarPedidos(new javax.swing.JFrame(), true);
+                JDFAgregarPedidos dialog = new JDFAgregarPedidos(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -209,15 +258,33 @@ public class JDFAgregarPedidos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAplicarPedido;
+    private javax.swing.JButton btnCerrarMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<Cliente> jcbSelectCliente;
     private javax.swing.JComboBox<Producto> jcbSelectProducto;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JList<LineaServicio> lstListarLineaPedidos;
     private javax.swing.JSpinner numCantidad;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public int getCantidad() {
+        return (Integer)numCantidad.getValue();
+    }
+
+    @Override
+    public Producto getProducto() {
+        return (Producto) jcbSelectProducto.getSelectedItem();
+    }
+
+    @Override
+    public Cliente getCliente() {
+        return (Cliente) jcbSelectCliente.getSelectedItem();
+    }
 }

@@ -1,5 +1,7 @@
 package restauranteserver;
 
+import entidades.LineaServicio;
+import entidades.Mesa;
 import entidades.Usuario;
 import gestoras.GestoraMesas;
 import gestoras.GestoraProductos;
@@ -82,5 +84,10 @@ public class Server implements IService {
         if (gsm.abrirMesa(m)) {
             notificarObserver(Evento.ABRIR_MESA);
         }
+    }
+
+    @Override
+    public void agregarLineaServicio(LineaServicio ls, Mesa m) {
+        m.getServicio().addLinea(ls);
     }
 }

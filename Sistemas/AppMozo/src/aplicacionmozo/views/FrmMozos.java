@@ -486,11 +486,10 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
     private void jtbMesasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbMesasMousePressed
         if (evt.getClickCount() == 2 && jtbMesas.getValueAt(jtbMesas.getSelectedRow(), jtbMesas.getSelectedColumn()) != null) {
             Mesa mesa = (Mesa) jtbMesas.getValueAt(jtbMesas.getSelectedRow(), jtbMesas.getSelectedColumn());
-            if (mesa.isAbierta()) {
-                JOptionPane.showMessageDialog(null, "Mesa " + mesa.getNumero(), "MESA SELECCIONADA", JOptionPane.INFORMATION_MESSAGE);
-            } else {
+            if (!mesa.isAbierta()) {
                 controller.abrirMesa(mesa.getNumero());
             }
+            new JDFAgregarPedidos(this, true, mesa).setVisible(true);
         }
     }//GEN-LAST:event_jtbMesasMousePressed
 

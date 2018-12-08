@@ -9,6 +9,11 @@ public class LineaServicio {
     private Producto producto;
     private int cantidad;
 
+    public LineaServicio(Producto producto, int cantidad) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+    }
+
     public float getPrecio() {
         return 1;
     }

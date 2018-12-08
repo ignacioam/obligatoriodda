@@ -1,5 +1,6 @@
 package servicio;
 
+import entidades.LineaServicio;
 import entidades.Mesa;
 import entidades.Usuario;
 import java.rmi.Remote;
@@ -23,4 +24,6 @@ public interface IService extends Remote {
     ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException;
     
     void abrirMesa(int mesa) throws RemoteException;
+    
+    void agregarLineaServicio(LineaServicio ls, Mesa m);
 }

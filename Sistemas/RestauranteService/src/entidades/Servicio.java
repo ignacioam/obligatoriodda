@@ -12,6 +12,10 @@ public class Servicio implements Serializable{
     private Cliente cliente;
     private ArrayList<LineaServicio> colLineas;
 
+    public Servicio(){
+        this.colLineas = new ArrayList<>();
+    }
+    
     public Cliente getCliente() {
         return cliente;
     }
@@ -29,10 +33,6 @@ public class Servicio implements Serializable{
     }
 
     public float calcularTotal() {
-        float total = 0;
-        for (LineaServicio ls : colLineas) {
-            total += ls.getPrecio();
-        }
-        return total;
+        return this.getCliente().getTipo().descuento(this);
     }
 }

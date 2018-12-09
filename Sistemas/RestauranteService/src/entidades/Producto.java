@@ -1,10 +1,12 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ignacio, Juan
  */
-public class Producto {
+public class Producto implements Serializable{
 
     private int codigo;
     private String nombre;
@@ -59,4 +61,11 @@ public class Producto {
     public void setUpp(UnidadProcesadora upp) {
         this.upp = upp;
     }
+
+    @Override
+    public String toString() {
+        return codigo + " | " + nombre + " - $" + precioUnitario + " - S:" + stock;
+    }
+    
+    
 }

@@ -1,5 +1,6 @@
 package gestoras;
 
+import entidades.UnidadProcesadora;
 import entidades.Usuario;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  */
 public class GestoraUnidadProcesadora {
 
-    private ArrayList<Usuario> colUnidadesProcesadoras;
+    private ArrayList<UnidadProcesadora> colUnidadesProcesadoras;
    
     //Singleton    
      private GestoraUnidadProcesadora() {

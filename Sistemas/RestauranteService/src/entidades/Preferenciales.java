@@ -5,13 +5,14 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Ignacio
  */
-public class Preferenciales implements TipoCliente {
+public class Preferenciales implements TipoCliente, Serializable {
 
     @Override
     public float descuento(Servicio s) {
@@ -31,5 +32,12 @@ public class Preferenciales implements TipoCliente {
         }
         return totalAgua;       
     }
+
+    @Override
+    public String toString() {
+        return "Preferencial";
+    }
+
+    
 
 }

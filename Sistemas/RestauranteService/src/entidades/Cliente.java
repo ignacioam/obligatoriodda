@@ -1,10 +1,12 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ignacio , Juan
  */
-public class Cliente {
+public class Cliente implements Serializable{
 
     private int id;
     private String nombre;
@@ -49,5 +51,12 @@ public class Cliente {
     public void setTipo(TipoCliente tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " - (" + tipo.toString() + ")";
+    }
+    
+    
 
 }

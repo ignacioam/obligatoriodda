@@ -1,10 +1,12 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ignacio, Juan
  */
-public class Comunes implements TipoCliente {
+public class Comunes implements TipoCliente, Serializable {
 
     @Override
     public float descuento(Servicio s) {
@@ -15,5 +17,10 @@ public class Comunes implements TipoCliente {
            }
         }
         return s.calcularTotal()-totalAgua;
+    }
+    
+    @Override
+    public String toString() {
+        return "Común";
     }
 }

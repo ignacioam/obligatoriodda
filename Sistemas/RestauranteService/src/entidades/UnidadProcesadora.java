@@ -1,10 +1,12 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ignacio, Juan
  */
-public class UnidadProcesadora {
+public class UnidadProcesadora implements Serializable{
 
     private String nombre;
 

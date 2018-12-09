@@ -7,6 +7,7 @@ package aplicacionmozo.controllers.servicio;
 
 import entidades.Cliente;
 import entidades.Producto;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface UIServicio {
     int getCantidad();
     Producto getProducto();
     Cliente getCliente();
+    void obtenerClientes(ArrayList<Cliente> c);
+    void obtenerProductos(ArrayList<Producto> p);
 }

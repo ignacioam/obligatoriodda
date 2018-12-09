@@ -33,6 +33,15 @@ public class LineaServicio {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    @Override
+    public String toString() {
+        return "PRODUCTO: " + producto.getNombre() + "\t|\t CANTIDAD: " + cantidad + "\t|\t PRECIO U: $" + getProducto().getPrecioUnitario() +"\t|\t SUB TOTAL: $" + getSubTotal();
+    }
+    
+    public float getSubTotal(){
+        return producto.getPrecioUnitario() * cantidad;
+    }
     
     
 }

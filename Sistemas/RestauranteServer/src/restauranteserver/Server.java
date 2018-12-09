@@ -1,8 +1,11 @@
 package restauranteserver;
 
+import entidades.Cliente;
 import entidades.LineaServicio;
 import entidades.Mesa;
+import entidades.Producto;
 import entidades.Usuario;
+import gestoras.GestoraClientes;
 import gestoras.GestoraMesas;
 import gestoras.GestoraProductos;
 import gestoras.GestoraServicios;
@@ -26,6 +29,7 @@ public class Server implements IService {
     private GestoraUnidadProcesadora gsup;
     private GestoraUsuarios gsu;
     private GestoraMesas gsm;
+    private GestoraClientes gsc;
     private ArrayList<IRemoteObserver> colObservers;
 
     public Server() {
@@ -34,6 +38,7 @@ public class Server implements IService {
         gsup = GestoraUnidadProcesadora.getInstance();
         gsu = GestoraUsuarios.getInstance();
         gsm = GestoraMesas.getInstance();
+        gsc = GestoraClientes.getInstance();
         colObservers = new ArrayList<>();
     }
 
@@ -89,5 +94,15 @@ public class Server implements IService {
     @Override
     public void agregarLineaServicio(LineaServicio ls, Mesa m) {
         m.getServicio().addLinea(ls);
+    }
+
+    @Override
+    public ArrayList<Cliente> getAllClientes() throws RemoteException {
+        return gsc.getAllClientes();
+    }
+
+    @Override
+    public ArrayList<Producto> getAllProductos() throws RemoteException {
+        return gsp.getAllProductosConStock();
     }
 }

@@ -19,7 +19,7 @@ public class Mesa implements Serializable {
         this.mozo = mozo;
         this.abierta = false;
     }
-
+    
     public int getNumero() {
         return this.numero;
     }

@@ -28,7 +28,7 @@ public interface IService extends Remote {
 
     void abrirMesa(int mesa) throws RemoteException;
 
-    void agregarLineaServicio(LineaServicio ls, Mesa m) throws RemoteException;
+    boolean agregarLineaServicio(int producto, int cantidad, int mesa) throws RemoteException;
 
     boolean transferirMesa(String mozoDestino, int mesa, String mozoOrigen) throws RemoteException;
 
@@ -39,4 +39,6 @@ public interface IService extends Remote {
     ArrayList<Cliente> getAllClientes() throws RemoteException;
 
     ArrayList<Producto> getAllProductos() throws RemoteException;
+
+    Mesa getMesaPorNumero(int numero)throws RemoteException;
 }

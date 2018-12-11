@@ -124,11 +124,6 @@ public class Server implements IService {
     }
 
     @Override
-    public void agregarLineaServicio(LineaServicio ls, Mesa m) {
-        m.getServicio().addLinea(ls);
-    }
-
-    @Override
     public ArrayList<Cliente> getAllClientes() throws RemoteException {
         return gsc.getAllClientes();
     }
@@ -138,4 +133,15 @@ public class Server implements IService {
         return gsp.getAllProductosConStock();
     }
 
+    @Override
+    public boolean agregarLineaServicio(int producto, int cantidad, int mesa) throws RemoteException {
+        Producto p = gsp.obtenerProductoPorNumero(producto);
+        Mesa m = gsm.obtenerMesaPorNumero(mesa);
+        return gss.addLineaAServicio(new LineaServicio(p, cantidad), mesa);
+    }
+
+    @Override
+    public Mesa getMesaPorNumero(int numero) throws RemoteException {
+        return gsm.obtenerMesaPorNumero(numero);
+    }
 }

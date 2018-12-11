@@ -7,15 +7,17 @@ import java.util.ArrayList;
  *
  * @author Ignacio, Juan
  */
-public class Servicio implements Serializable{
+public class Servicio implements Serializable {
 
+    private int numero;
     private Cliente cliente;
     private ArrayList<LineaServicio> colLineas;
 
-    public Servicio(){
+    public Servicio() {
+        this.cliente = null;
         this.colLineas = new ArrayList<>();
     }
-    
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -28,11 +30,35 @@ public class Servicio implements Serializable{
         return colLineas;
     }
 
-    public void addLinea(LineaServicio linea) {
+    public void addLinea(LineaServicio linea) {        
         this.colLineas.add(linea);
     }
 
     public float calcularTotal() {
-        return this.getCliente().getTipo().descuento(this);
+        if (this.cliente != null) {
+            return this.getCliente().getTipo().descuento(this);
+        }
+        float precio = 0;
+        for (LineaServicio ls : colLineas) {
+            precio += ls.getPrecio();
+        }
+        return precio;
+    }
+
+    public LineaServicio getLineaProducto(int producto) {
+        for (LineaServicio ls : colLineas) {
+            if (ls.getProducto().getCodigo() == producto) {
+                return ls;
+            }
+        }
+        return null;
+    }
+
+    public void setNumero(int i) {
+        this.numero = i;
+    }
+    
+    public int getNumero(){
+        return this.numero;
     }
 }

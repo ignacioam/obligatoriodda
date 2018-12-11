@@ -42,6 +42,7 @@ public class GestoraMesas {
     public boolean abrirMesa(int mesa) {
         Mesa m = obtenerMesaPorNumero(mesa);
         if (m != null && m.abrir()) {
+            GestoraServicios.getInstance().addServicio(m.getServicio());
             return true;
         }
         return false;

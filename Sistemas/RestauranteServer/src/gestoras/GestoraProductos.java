@@ -64,4 +64,13 @@ public class GestoraProductos {
         colProductos.add(new Producto(11, "Miller", 120, 20, bar));
         colProductos.add(new Producto(12, "Pomelo", 80, 0, bar));
     }
+
+    public Producto obtenerProductoPorNumero(int producto) {
+        for (Producto p : colProductos) {
+            if(p.getCodigo() == producto){
+                return p;
+            }
+        }
+        return null;
+    }
 }

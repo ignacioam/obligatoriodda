@@ -1,10 +1,12 @@
 package entidades;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ignacio, Juan
  */
-public class LineaServicio {
+public class LineaServicio implements Serializable{
 
     private Producto producto;
     private int cantidad;

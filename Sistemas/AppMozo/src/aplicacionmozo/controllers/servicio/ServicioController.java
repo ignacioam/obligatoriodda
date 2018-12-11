@@ -1,4 +1,5 @@
 package aplicacionmozo.controllers.servicio;
+
 import entidades.LineaServicio;
 import entidades.Mesa;
 import entidades.Producto;
@@ -11,41 +12,47 @@ import servicio.IService;
  *
  * @author Ignacio, Juan
  */
-public class ServicioController{
+public class ServicioController {
+
     IService server;
     UIServicio ui;
     Mesa mesa;
-    
-    public ServicioController(IService server, UIServicio ui, Mesa m){
+
+    public ServicioController(IService server, UIServicio ui, Mesa m) {
         this.server = server;
         this.ui = ui;
         this.mesa = m;
     }
-    
-    public void agregarLineaServicio(){
+
+    public void agregarLineaServicio() {
         try {
             Producto p = ui.getProducto();
-            int cantidad = ui.getCantidad();
-            
-            server.agregarLineaServicio(new LineaServicio(p, cantidad), mesa);
+            int cant = ui.getCantidad();
+            if (server.agregarLineaServicio(p.getCodigo(), cant, mesa.getNumero())) {
+                mesa = server.getMesaPorNumero(mesa.getNumero());
+                System.out.println(mesa.getServicio().getLineas());
+                ui.listarPedido(mesa);
+            } else {
+                ui.mostrarMensaje("No hay stock suficiente");
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void obtenerClientes(){
+
+    public void obtenerClientes() {
         try {
-            ui.obtenerClientes(server.getAllClientes());
+            ui.listarClientes(server.getAllClientes());
         } catch (RemoteException ex) {
             Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void listarProductos(){
+
+    public void listarProductos() {
         try {
-            ui.obtenerProductos(server.getAllProductos());
+            ui.listarProdcutos(server.getAllProductos());
         } catch (RemoteException ex) {
             Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
+    }
 }

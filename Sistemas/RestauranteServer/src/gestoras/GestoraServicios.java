@@ -1,5 +1,7 @@
 package gestoras;
 
+import entidades.LineaServicio;
+import entidades.Mesa;
 import entidades.Servicio;
 import java.util.ArrayList;
 
@@ -25,5 +27,27 @@ public class GestoraServicios {
             instance = new GestoraServicios();
         }
         return instance;
+    }
+
+    public void addServicio(Servicio s) {
+        s.setNumero(1 + colServicios.size());
+        this.colServicios.add(s);
+    }
+
+    public boolean addLineaAServicio(LineaServicio linea, int mesa) {
+        Servicio s = GestoraMesas.getInstance().obtenerMesaPorNumero(mesa).getServicio();
+        LineaServicio ls = s.getLineaProducto(linea.getProducto().getCodigo());
+        if (ls != null) {
+            int diff = ls.getCantidad() - linea.getCantidad();
+            if (diff < 0 && linea.getProducto().getStock() < Math.abs(diff)) {
+                return false;
+            }
+            linea.getProducto().cambiarStock(diff);
+            ls.setCantidad(linea.getCantidad());
+            return true;
+        }
+        linea.getProducto().cambiarStock(-linea.getCantidad());
+        s.addLinea(linea);
+        return true;
     }
 }

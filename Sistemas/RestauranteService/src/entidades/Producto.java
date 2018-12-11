@@ -6,7 +6,7 @@ import java.io.Serializable;
  *
  * @author Ignacio, Juan
  */
-public class Producto implements Serializable{
+public class Producto implements Serializable {
 
     private int codigo;
     private String nombre;
@@ -66,6 +66,9 @@ public class Producto implements Serializable{
     public String toString() {
         return codigo + " | " + nombre + " - $" + precioUnitario + " - S:" + stock;
     }
-    
-    
+
+    public void cambiarStock(int i) {
+        this.stock += i;
+    }
+
 }

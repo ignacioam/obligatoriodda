@@ -1,22 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aplicacionmozo.controllers.servicio;
 
 import entidades.Cliente;
+import entidades.Mesa;
 import entidades.Producto;
 import java.util.ArrayList;
 
 /**
  *
- * @author Ignacio
+ * @author Ignacio, Juan
  */
 public interface UIServicio {
+
     int getCantidad();
+
     Producto getProducto();
+
     Cliente getCliente();
-    void obtenerClientes(ArrayList<Cliente> c);
-    void obtenerProductos(ArrayList<Producto> p);
+
+    void listarClientes(ArrayList<Cliente> c);
+
+    void listarProdcutos(ArrayList<Producto> p);
+
+    void mostrarMensaje(String msg);
+    
+    void listarPedido(Mesa mesa);
+
 }

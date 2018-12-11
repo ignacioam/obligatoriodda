@@ -19,7 +19,7 @@ public class Mesa implements Serializable {
         this.mozo = mozo;
         this.abierta = false;
     }
-    
+
     public int getNumero() {
         return this.numero;
     }
@@ -52,7 +52,7 @@ public class Mesa implements Serializable {
     public void setServicio(Servicio servicio) {
         this.servicio = servicio;
     }
-    
+
     public boolean abrir() {
         if (!this.abierta) {
             this.abierta = true;
@@ -69,5 +69,9 @@ public class Mesa implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public void setMozo(Mozo mozo) {
+        this.mozo = mozo;
     }
 }

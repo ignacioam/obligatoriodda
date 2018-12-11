@@ -7,6 +7,7 @@ import aplicacionmozo.tablemesas.MesaCellRenderer;
 import aplicacionmozo.tablemesas.MesaTableModel;
 import entidades.Mesa;
 import entidades.Mozo;
+import entidades.Transferencia;
 import entidades.Usuario;
 import java.awt.Color;
 import java.rmi.RemoteException;
@@ -372,6 +373,11 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         btnAceptarTransferirMesa.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         btnAceptarTransferirMesa.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptarTransferirMesa.setText("Aceptar");
+        btnAceptarTransferirMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarTransferirMesaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelTransferirMesaLayout = new javax.swing.GroupLayout(panelTransferirMesa);
         panelTransferirMesa.setLayout(panelTransferirMesaLayout);
@@ -493,6 +499,10 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         }
     }//GEN-LAST:event_jtbMesasMousePressed
 
+    private void btnAceptarTransferirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarTransferirMesaActionPerformed
+        controller.iniciarTransferencia();
+    }//GEN-LAST:event_btnAceptarTransferirMesaActionPerformed
+
     private void configurarListadoDeMesas() {
         btnTransefirMesas.setBackground(new Color(76, 132, 203));
         optMesas.setBackground(new Color(26, 91, 176));
@@ -606,6 +616,26 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
     @Override
     public void listarMesasTransferencia(ArrayList<Mesa> mesas) {
         jlstMesas.setListData(mesas.toArray());
+    }
+
+    @Override
+    public Mesa getMesaTransferencia() {
+        return (Mesa) jlstMesas.getSelectedValue();
+    }
+
+    @Override
+    public Mozo getMozoTransferencia() {
+        return (Mozo) jlstMozos.getSelectedValue();
+    }
+
+    @Override
+    public boolean tranferenciaMesa(Transferencia t) {
+        return JOptionPane.showConfirmDialog(this, "¿Acepta la mesa?", "Atencion", JOptionPane.YES_NO_OPTION) == 0;
+    }
+
+    @Override
+    public void mostrarMensaje(String msg, String titulo, int opt) {
+        JOptionPane.showMessageDialog(this, msg, titulo, opt);
     }
 
 }

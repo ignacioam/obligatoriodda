@@ -4,6 +4,7 @@ import entidades.Cliente;
 import entidades.LineaServicio;
 import entidades.Mesa;
 import entidades.Producto;
+import entidades.Transferencia;
 import entidades.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -20,16 +21,22 @@ public interface IService extends Remote {
     Usuario getUserPorUserName(String username) throws RemoteException;
 
     void cerrarSesion(String username) throws RemoteException;
-    
+
     void agregarObserver(IRemoteObserver io) throws RemoteException;
-    
+
     ArrayList<Usuario> obtenerUsuariosConectados() throws RemoteException;
-    
+
     void abrirMesa(int mesa) throws RemoteException;
-    
+
     void agregarLineaServicio(LineaServicio ls, Mesa m) throws RemoteException;
-    
+
+    boolean transferirMesa(String mozoDestino, int mesa, String mozoOrigen) throws RemoteException;
+
+    ArrayList<Transferencia> obtenerTransferenciasPendientesDeMozo(String username) throws RemoteException;
+
+    void transferirMesa(boolean aceptada, int numTransferencia) throws RemoteException;
+
     ArrayList<Cliente> getAllClientes() throws RemoteException;
-    
+
     ArrayList<Producto> getAllProductos() throws RemoteException;
 }

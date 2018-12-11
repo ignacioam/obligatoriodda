@@ -3,12 +3,14 @@ package aplicacionmozo.controllers.mozo;
 import aplicacionmozo.Sistema;
 import entidades.Mesa;
 import entidades.Mozo;
+import entidades.Transferencia;
 import entidades.Usuario;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import servicio.Evento;
 import servicio.IRemoteObserver;
 import servicio.IService;
@@ -58,6 +60,15 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
             Sistema.setMozo((Mozo) s.getUserPorUserName(Sistema.getMozo().getUsername()));
             ui.listarMesas(obtenerMatrizDeMesas(Sistema.getMozo().getMesas()));
             ui.listarMesasTransferencia(Sistema.getMozo().getMesas());
+        } else if (obj == Evento.INICIAR_TRANSFERENCIA) {
+            Sistema.setMozo((Mozo) s.getUserPorUserName(Sistema.getMozo().getUsername()));
+            for (Transferencia t : server.obtenerTransferenciasPendientesDeMozo(Sistema.getMozo().getUsername())) {
+                boolean opt = ui.tranferenciaMesa(t);
+                server.transferirMesa(opt, t.getNumero());
+            }
+            ArrayList<Mesa> col = Sistema.getMozo().getMesas();
+            ui.listarMesas(obtenerMatrizDeMesas(col));
+            ui.listarMesasTransferencia(col);
         }
     }
 
@@ -84,5 +95,19 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
             }
         }
         return matriz;
+    }
+
+    public void iniciarTransferencia() {
+        try {
+            Mesa mesa = ui.getMesaTransferencia();
+            Mozo mozo = ui.getMozoTransferencia();
+            if (server.transferirMesa(mozo.getUsername(), mesa.getNumero(), Sistema.getMozo().getUsername())) {
+                ui.mostrarMensaje("Mesa aceptada", "Informacón", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                ui.mostrarMensaje("Mesa rechazada", "Informacón", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MozoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

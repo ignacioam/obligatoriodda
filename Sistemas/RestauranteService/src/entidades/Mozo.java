@@ -15,12 +15,21 @@ public class Mozo extends Usuario implements Serializable {
         super(usuario, contrasenia, nombre);
         this.colMesas = new ArrayList<>();
     }
-    
-    public void addMesa(Mesa m){
+
+    public void addMesa(Mesa m) {
         colMesas.add(m);
     }
-    
-    public ArrayList<Mesa> getMesas(){
-        return this.colMesas;
+
+    public ArrayList<Mesa> getMesas() {
+        return new ArrayList<>(colMesas);
+    }
+
+    public void removeMesa(int numero) {
+        for (Mesa m : colMesas) {
+            if (m.getNumero() == numero) {
+                colMesas.remove(m);
+                return;
+            }
+        }
     }
 }

@@ -1,14 +1,18 @@
 package restauranteserver;
 
 import entidades.Cliente;
+import entidades.Estado;
 import entidades.LineaServicio;
 import entidades.Mesa;
+import entidades.Mozo;
 import entidades.Producto;
+import entidades.Transferencia;
 import entidades.Usuario;
 import gestoras.GestoraClientes;
 import gestoras.GestoraMesas;
 import gestoras.GestoraProductos;
 import gestoras.GestoraServicios;
+import gestoras.GestoraTransferencias;
 import gestoras.GestoraUnidadProcesadora;
 import gestoras.GestoraUsuarios;
 import java.rmi.RemoteException;
@@ -30,6 +34,7 @@ public class Server implements IService {
     private GestoraUsuarios gsu;
     private GestoraMesas gsm;
     private GestoraClientes gsc;
+    private GestoraTransferencias gst;
     private ArrayList<IRemoteObserver> colObservers;
 
     public Server() {
@@ -39,6 +44,7 @@ public class Server implements IService {
         gsu = GestoraUsuarios.getInstance();
         gsm = GestoraMesas.getInstance();
         gsc = GestoraClientes.getInstance();
+        gst = GestoraTransferencias.getInstance();
         colObservers = new ArrayList<>();
     }
 
@@ -92,6 +98,32 @@ public class Server implements IService {
     }
 
     @Override
+    public boolean transferirMesa(String mozoDestino, int mesa, String mozoOrigen) throws RemoteException {
+        Mesa m = gsm.obtenerMesaPorNumero(mesa);
+        Mozo mozoD = (Mozo) gsu.getUserPorUserName(mozoDestino);
+        Mozo mozoO = (Mozo) gsu.getUserPorUserName(mozoOrigen);
+        Transferencia t = new Transferencia(m, mozoD, mozoO);
+        gst.addTransferencia(t);
+        notificarObserver(Evento.INICIAR_TRANSFERENCIA);
+        if (t.getEstado() == Estado.PENDIENTE || t.getEstado() == Estado.RECHAZADA) {
+            t.setEstado(Estado.RECHAZADA);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public ArrayList<Transferencia> obtenerTransferenciasPendientesDeMozo(String username) throws RemoteException {
+        return gst.obtenerTransferenciasPendientesDeMozo(username);
+    }
+
+    @Override
+    public void transferirMesa(boolean aceptada, int numTransferencia) throws RemoteException {
+        gst.transferirMesa(aceptada, numTransferencia);
+        notificarObserver(Evento.MESA_TRANSFERIDA);
+    }
+
+    @Override
     public void agregarLineaServicio(LineaServicio ls, Mesa m) {
         m.getServicio().addLinea(ls);
     }
@@ -105,4 +137,5 @@ public class Server implements IService {
     public ArrayList<Producto> getAllProductos() throws RemoteException {
         return gsp.getAllProductosConStock();
     }
+
 }

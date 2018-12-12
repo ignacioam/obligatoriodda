@@ -30,7 +30,7 @@ public class Servicio implements Serializable {
         return colLineas;
     }
 
-    public void addLinea(LineaServicio linea) {        
+    public void addLinea(LineaServicio linea) {
         this.colLineas.add(linea);
     }
 
@@ -57,8 +57,8 @@ public class Servicio implements Serializable {
     public void setNumero(int i) {
         this.numero = i;
     }
-    
-    public int getNumero(){
+
+    public int getNumero() {
         return this.numero;
     }
 }

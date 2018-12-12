@@ -17,27 +17,25 @@ public class Preferenciales implements TipoCliente, Serializable {
     @Override
     public float descuento(Servicio s) {
         float total = s.calcularTotal() - descuentoPorAgua(s.getLineas());
-        if(total > 2000){
-            return total-(total*0.05f);
+        if (total > 2000) {
+            return total - (total * 0.05f);
         }
         return total;
     }
-    
-    private float descuentoPorAgua(ArrayList<LineaServicio> ls){
+
+    private float descuentoPorAgua(ArrayList<LineaServicio> ls) {
         float totalAgua = 0;
-        for(LineaServicio lp : ls){
-           if(lp.getProducto().getNombre() == "Agua Mineral"){
-               totalAgua+= lp.getProducto().getPrecioUnitario();
-           }
+        for (LineaServicio lp : ls) {
+            if (lp.getProducto().getNombre() == "Agua Mineral") {
+                totalAgua += lp.getProducto().getPrecioUnitario();
+            }
         }
-        return totalAgua;       
+        return totalAgua;
     }
 
     @Override
     public String toString() {
         return "Preferencial";
     }
-
-    
 
 }

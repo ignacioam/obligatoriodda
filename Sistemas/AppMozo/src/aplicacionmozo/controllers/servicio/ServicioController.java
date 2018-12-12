@@ -1,6 +1,5 @@
 package aplicacionmozo.controllers.servicio;
 
-import entidades.LineaServicio;
 import entidades.Mesa;
 import entidades.Producto;
 import java.rmi.RemoteException;

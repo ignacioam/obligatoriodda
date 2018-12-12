@@ -12,7 +12,7 @@ import javax.swing.SpinnerNumberModel;
 
 /**
  *
- * @author Ignacio
+ * @author Ignacio, Juan
  */
 public class JDFAgregarPedidos extends javax.swing.JDialog implements UIServicio {
 
@@ -268,10 +268,10 @@ public class JDFAgregarPedidos extends javax.swing.JDialog implements UIServicio
     }//GEN-LAST:event_jcbSelectClienteItemStateChanged
 
     private void jcbSelectProductoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSelectProductoItemStateChanged
-        if (jcbSelectProducto.getSelectedIndex() > 0) {
+        if (jcbSelectProducto.getSelectedIndex() > -1) {
             Producto p = (Producto) evt.getItem();
-            SpinnerNumberModel m = new SpinnerNumberModel(1, 1, p.getStock(), 1);
-            numCantidad.setModel(m);
+            SpinnerNumberModel model = new SpinnerNumberModel(1, 1, p.getStock(), 1);
+            numCantidad.setModel(model);
         }
     }//GEN-LAST:event_jcbSelectProductoItemStateChanged
 

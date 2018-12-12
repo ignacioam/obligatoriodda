@@ -150,7 +150,6 @@ public class Server implements IService {
         gst.addTransferencia(t);
         ThreadSimple ts = new ThreadSimple(t.getNumero());
         ts.iniciar();
-        notificarObserver(Evento.INICIAR_TRANSFERENCIA);
     }
 
     @Override

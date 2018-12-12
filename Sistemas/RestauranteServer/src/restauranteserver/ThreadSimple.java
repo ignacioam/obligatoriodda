@@ -12,12 +12,9 @@ public class ThreadSimple implements Runnable {
 
     private Thread miThread = null;
     public int numTransferencia;
-    private int max = 31;
-    private int segundos;
 
     public ThreadSimple(int numTransferencia) {
         this.numTransferencia = numTransferencia;
-        segundos = 0;
     }
 
     public void iniciar() {
@@ -27,13 +24,12 @@ public class ThreadSimple implements Runnable {
 
     @Override
     public void run() {
-        while (segundos < max) {
-            segundos++;
-            try {
-                miThread.sleep(1000);
-            } catch (InterruptedException exc) {
-            };
-        }
+        try {
+            Server.getInstance().notificarObserver(Evento.INICIAR_TRANSFERENCIA);
+            miThread.sleep(31000);
+        } catch (InterruptedException exc) {
+        };
+
         if (GestoraTransferencias.getInstance().getTransferenciaPorNumero(numTransferencia).getEstado() == Estado.PENDIENTE) {
             GestoraTransferencias.getInstance().transferirMesa(false, numTransferencia);
             Server.getInstance().notificarObserver(Evento.MESA_TRANSFERIDA);

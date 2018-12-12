@@ -11,7 +11,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import servicio.Evento;
 import servicio.IRemoteObserver;
 import servicio.IService;

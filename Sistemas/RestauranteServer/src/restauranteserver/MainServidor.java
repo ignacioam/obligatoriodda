@@ -35,7 +35,7 @@ public class MainServidor {
      */
     public void iniciarServidor() {
         try {
-            Server servidor = new Server();
+            Server servidor = Server.getInstance();
             IService remote = (IService) UnicastRemoteObject.exportObject(servidor, PUERTO);
 
             Registry registro = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);

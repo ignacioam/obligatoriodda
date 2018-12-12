@@ -10,28 +10,28 @@ import java.util.ArrayList;
  * @author juanc
  */
 public class GestoraTransferencias {
-
+    
     private ArrayList<Transferencia> colTransferencias;
 
     //Singleton
     private GestoraTransferencias() {
         this.colTransferencias = new ArrayList<>();
     }
-
+    
     private static GestoraTransferencias instance;
-
+    
     public static GestoraTransferencias getInstance() {
         if (null == instance) {
             instance = new GestoraTransferencias();
         }
         return instance;
     }
-
+    
     public void addTransferencia(Transferencia t) {
         t.setNumero(colTransferencias.size() + 1);
         colTransferencias.add(t);
     }
-
+    
     public ArrayList<Transferencia> obtenerTransferenciasPendientesDeMozo(String username) {
         ArrayList<Transferencia> aux = new ArrayList<>();
         for (Transferencia t : colTransferencias) {
@@ -41,7 +41,7 @@ public class GestoraTransferencias {
         }
         return aux;
     }
-
+    
     public void transferirMesa(boolean aceptada, int numTransferencia) {
         Transferencia t = getTransferenciaPorNumero(numTransferencia);
         if (t != null) {
@@ -56,7 +56,7 @@ public class GestoraTransferencias {
             }
         }
     }
-
+    
     public Transferencia getTransferenciaPorNumero(int numTransferencia) {
         for (Transferencia t : colTransferencias) {
             if (t.getNumero() == numTransferencia) {
@@ -64,5 +64,19 @@ public class GestoraTransferencias {
             }
         }
         return null;
+    }
+    
+    public ArrayList<Transferencia> getTransferenciasEmitidasMozo(String username) {
+        ArrayList<Transferencia> aux = new ArrayList<>();
+        for (Transferencia t : colTransferencias) {
+            if (t.getMozoOrigen().getUsername().equals(username)) {
+                aux.add(t);
+            }
+        }
+        return aux;
+    }
+    
+    public void transferenciaEmitida(int numTransferencia) {
+        getTransferenciaPorNumero(numTransferencia).setEmitida(true);
     }
 }

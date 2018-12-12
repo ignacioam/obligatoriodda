@@ -29,8 +29,8 @@ public interface IService extends Remote {
     void abrirMesa(int mesa) throws RemoteException;
 
     boolean agregarLineaServicio(int producto, int cantidad, int mesa) throws RemoteException;
-
-    boolean transferirMesa(String mozoDestino, int mesa, String mozoOrigen) throws RemoteException;
+    
+    void iniciarTransferencia(String mozoOrigen, String mozoDestino, int mesa) throws RemoteException;
 
     ArrayList<Transferencia> obtenerTransferenciasPendientesDeMozo(String username) throws RemoteException;
 
@@ -41,4 +41,9 @@ public interface IService extends Remote {
     ArrayList<Producto> getAllProductos() throws RemoteException;
 
     Mesa getMesaPorNumero(int numero)throws RemoteException;
+
+    ArrayList<Transferencia> getTransferenciasEmitidasMozo(String username) throws RemoteException;
+
+    public void transferenciaEmitida(int numero) throws RemoteException;
+
 }

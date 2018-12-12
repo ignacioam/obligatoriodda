@@ -10,6 +10,7 @@ public class Transferencia implements Serializable {
 
     private int numero;
     private Estado estado;
+    private boolean emitida;
     private Mesa mesa;
     private Mozo mozoDestino;
     private Mozo mozoOrigen;
@@ -19,6 +20,7 @@ public class Transferencia implements Serializable {
         this.mesa = mesa;
         this.mozoDestino = mozoDestino;
         this.mozoOrigen = mozoOrigen;
+        this.emitida = false;
     }
 
     public int getNumero() {
@@ -56,4 +58,14 @@ public class Transferencia implements Serializable {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    public boolean isEmitida() {
+        return emitida;
+    }
+
+    public void setEmitida(boolean emitida) {
+        this.emitida = emitida;
+    }
+    
+    
 }

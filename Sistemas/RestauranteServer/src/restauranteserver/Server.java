@@ -37,7 +37,16 @@ public class Server implements IService {
     private GestoraTransferencias gst;
     private ArrayList<IRemoteObserver> colObservers;
 
-    public Server() {
+    private static Server instance;
+
+    public static Server getInstance() {
+        if (instance == null) {
+            instance = new Server();
+        }
+        return instance;
+    }
+
+    private Server() {
         gsp = GestoraProductos.getInstance();
         gss = GestoraServicios.getInstance();
         gsup = GestoraUnidadProcesadora.getInstance();
@@ -98,29 +107,16 @@ public class Server implements IService {
     }
 
     @Override
-    public boolean transferirMesa(String mozoDestino, int mesa, String mozoOrigen) throws RemoteException {
-        Mesa m = gsm.obtenerMesaPorNumero(mesa);
-        Mozo mozoD = (Mozo) gsu.getUserPorUserName(mozoDestino);
-        Mozo mozoO = (Mozo) gsu.getUserPorUserName(mozoOrigen);
-        Transferencia t = new Transferencia(m, mozoD, mozoO);
-        gst.addTransferencia(t);
-        notificarObserver(Evento.INICIAR_TRANSFERENCIA);
-        if (t.getEstado() == Estado.PENDIENTE || t.getEstado() == Estado.RECHAZADA) {
-            t.setEstado(Estado.RECHAZADA);
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public ArrayList<Transferencia> obtenerTransferenciasPendientesDeMozo(String username) throws RemoteException {
         return gst.obtenerTransferenciasPendientesDeMozo(username);
     }
 
     @Override
     public void transferirMesa(boolean aceptada, int numTransferencia) throws RemoteException {
-        gst.transferirMesa(aceptada, numTransferencia);
-        notificarObserver(Evento.MESA_TRANSFERIDA);
+        if (gst.getTransferenciaPorNumero(numTransferencia).getEstado() == Estado.PENDIENTE) {
+            gst.transferirMesa(aceptada, numTransferencia);
+            notificarObserver(Evento.MESA_TRANSFERIDA);
+        }
     }
 
     @Override
@@ -143,5 +139,27 @@ public class Server implements IService {
     @Override
     public Mesa getMesaPorNumero(int numero) throws RemoteException {
         return gsm.obtenerMesaPorNumero(numero);
+    }
+
+    @Override
+    public void iniciarTransferencia(String mozoOrigen, String mozoDestino, int mesa) throws RemoteException {
+        Mesa m = gsm.obtenerMesaPorNumero(mesa);
+        Mozo mozoD = (Mozo) gsu.getUserPorUserName(mozoDestino);
+        Mozo mozoO = (Mozo) gsu.getUserPorUserName(mozoOrigen);
+        Transferencia t = new Transferencia(m, mozoD, mozoO);
+        gst.addTransferencia(t);
+        ThreadSimple ts = new ThreadSimple(t.getNumero());
+        ts.iniciar();
+        notificarObserver(Evento.INICIAR_TRANSFERENCIA);
+    }
+
+    @Override
+    public ArrayList<Transferencia> getTransferenciasEmitidasMozo(String username) throws RemoteException {
+        return gst.getTransferenciasEmitidasMozo(username);
+    }
+
+    @Override
+    public void transferenciaEmitida(int numero) throws RemoteException {
+        gst.transferenciaEmitida(numero);
     }
 }

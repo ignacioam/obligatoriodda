@@ -1,5 +1,6 @@
 package aplicacionmozo.views;
 
+import aplicacionmozo.DialogoPersonalizado;
 import aplicacionmozo.controllers.mozo.MozoController;
 import aplicacionmozo.controllers.mozo.UIMozo;
 import aplicacionmozo.Sistema;
@@ -80,6 +81,7 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
         jlstMozos = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         btnAceptarTransferirMesa = new javax.swing.JButton();
+        lblMensajeTransferencia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -379,6 +381,8 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
             }
         });
 
+        lblMensajeTransferencia.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout panelTransferirMesaLayout = new javax.swing.GroupLayout(panelTransferirMesa);
         panelTransferirMesa.setLayout(panelTransferirMesaLayout);
         panelTransferirMesaLayout.setHorizontalGroup(
@@ -392,7 +396,8 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 466, Short.MAX_VALUE)
                         .addComponent(btnCerrarTransMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTransferirMesaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblMensajeTransferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAceptarTransferirMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3)
                     .addGroup(panelTransferirMesaLayout.createSequentialGroup()
@@ -418,7 +423,9 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAceptarTransferirMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelTransferirMesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAceptarTransferirMesa, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                    .addComponent(lblMensajeTransferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -584,6 +591,7 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
     private javax.swing.JTable jtbMesas;
     private javax.swing.JLabel lblImgUser;
     private javax.swing.JLabel lblLogout;
+    private javax.swing.JLabel lblMensajeTransferencia;
     private javax.swing.JLabel lblMesas;
     private javax.swing.JLabel lblMozo;
     private javax.swing.JLabel lblTransMesa;
@@ -630,12 +638,14 @@ public class FrmMozos extends javax.swing.JFrame implements UIMozo {
 
     @Override
     public boolean tranferenciaMesa(Transferencia t) {
-        return JOptionPane.showConfirmDialog(this, "¿Acepta la mesa?", "Atencion", JOptionPane.YES_NO_OPTION) == 0;
+        DialogoPersonalizado dialog = new DialogoPersonalizado(null,t);   
+        return dialog.OK;
     }
 
     @Override
-    public void mostrarMensaje(String msg, String titulo, int opt) {
-        JOptionPane.showMessageDialog(this, msg, titulo, opt);
+    public void mostrarMensaje(String msg, Color color) {
+        lblMensajeTransferencia.setForeground(color);
+        lblMensajeTransferencia.setText(msg);
     }
 
 }

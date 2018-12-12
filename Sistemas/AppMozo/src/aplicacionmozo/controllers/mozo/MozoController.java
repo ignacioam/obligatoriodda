@@ -1,6 +1,7 @@
 package aplicacionmozo.controllers.mozo;
 
 import aplicacionmozo.Sistema;
+import entidades.Estado;
 import entidades.Mesa;
 import entidades.Mozo;
 import entidades.Transferencia;
@@ -32,6 +33,7 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
         ui.listarMesas(obtenerMatrizDeMesas(mesasMozo));
         ui.listarMesasTransferencia(mesasMozo);
         listarUsers(Sistema.getService().obtenerUsuariosConectados());
+
     }
 
     public void cerrarSesion() {
@@ -52,24 +54,24 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
 
     @Override
     public void update(IService s, Object obj) throws RemoteException {
+        Sistema.setMozo((Mozo) s.getUserPorUserName(Sistema.getMozo().getUsername()));
         if (obj == Evento.USUARIO_CONECTADO || obj == Evento.USUARIO_DESCONECTADO) {
             listarUsers(s.obtenerUsuariosConectados());
         } else if (obj == Evento.MESA_TRANSFERIDA) {
-
+            emitirTransferencias(s.getTransferenciasEmitidasMozo(Sistema.getMozo().getUsername()));
         } else if (obj == Evento.ABRIR_MESA) {
-            Sistema.setMozo((Mozo) s.getUserPorUserName(Sistema.getMozo().getUsername()));
-            ui.listarMesas(obtenerMatrizDeMesas(Sistema.getMozo().getMesas()));
-            ui.listarMesasTransferencia(Sistema.getMozo().getMesas());
+            actualizarMesas();
         } else if (obj == Evento.INICIAR_TRANSFERENCIA) {
-            Sistema.setMozo((Mozo) s.getUserPorUserName(Sistema.getMozo().getUsername()));
-            for (Transferencia t : server.obtenerTransferenciasPendientesDeMozo(Sistema.getMozo().getUsername())) {
-                boolean opt = ui.tranferenciaMesa(t);
-                server.transferirMesa(opt, t.getNumero());
-            }
-            ArrayList<Mesa> col = Sistema.getMozo().getMesas();
-            ui.listarMesas(obtenerMatrizDeMesas(col));
-            ui.listarMesasTransferencia(col);
+            mostrarTransferenciasPendientes();
         }
+    }
+
+    private void mostrarTransferenciasPendientes() throws RemoteException {
+        for (Transferencia t : server.obtenerTransferenciasPendientesDeMozo(Sistema.getMozo().getUsername())) {
+            boolean opt = ui.tranferenciaMesa(t);
+            server.transferirMesa(opt, t.getNumero());
+        }
+        actualizarMesas();
     }
 
     private void listarUsers(ArrayList<Usuario> col) {
@@ -80,6 +82,28 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
             }
         }
         ui.listarUsuarios(col);
+    }
+
+    private void actualizarMesas() {
+        ui.listarMesas(obtenerMatrizDeMesas(Sistema.getMozo().getMesas()));
+        ui.listarMesasTransferencia(Sistema.getMozo().getMesas());
+    }
+
+    private void emitirTransferencias(ArrayList<Transferencia> col) {
+        for (Transferencia t : col) {
+            if (t.getEstado() != Estado.PENDIENTE && !t.isEmitida()) {
+                try {
+                    if (t.getEstado() == Estado.ACEPTADA) {
+                        ui.mostrarMensaje("Transferencia aceptada - Mesa: " + t.getMesa().getNumero(), new java.awt.Color(98, 160, 240));
+                    } else {
+                        ui.mostrarMensaje("Transferencia rechazada - Mesa: " + t.getMesa().getNumero(), new java.awt.Color(255, 102, 102));
+                    }
+                    server.transferenciaEmitida(t.getNumero());
+                } catch (RemoteException ex) {
+                    Logger.getLogger(MozoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     private Mesa[][] obtenerMatrizDeMesas(ArrayList<Mesa> mesasMozo) {
@@ -101,11 +125,7 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
         try {
             Mesa mesa = ui.getMesaTransferencia();
             Mozo mozo = ui.getMozoTransferencia();
-            if (server.transferirMesa(mozo.getUsername(), mesa.getNumero(), Sistema.getMozo().getUsername())) {
-                ui.mostrarMensaje("Mesa aceptada", "Informacón", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                ui.mostrarMensaje("Mesa rechazada", "Informacón", JOptionPane.INFORMATION_MESSAGE);
-            }
+            server.iniciarTransferencia(Sistema.getMozo().getUsername(), mozo.getUsername(), mesa.getNumero());
         } catch (RemoteException ex) {
             Logger.getLogger(MozoController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -4,6 +4,7 @@ import entidades.Mesa;
 import entidades.Mozo;
 import entidades.Transferencia;
 import entidades.Usuario;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +24,6 @@ public interface UIMozo {
     Mozo getMozoTransferencia();
 
     boolean tranferenciaMesa(Transferencia t);
-    
-    void mostrarMensaje(String msg, String titulo, int opt);
+
+    void mostrarMensaje(String msg, Color color);
 }

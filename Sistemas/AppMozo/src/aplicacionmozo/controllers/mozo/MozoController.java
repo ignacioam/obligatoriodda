@@ -57,6 +57,7 @@ public class MozoController extends UnicastRemoteObject implements IRemoteObserv
         if (obj == Evento.USUARIO_CONECTADO || obj == Evento.USUARIO_DESCONECTADO) {
             listarUsers(s.obtenerUsuariosConectados());
         } else if (obj == Evento.MESA_TRANSFERIDA) {
+            actualizarMesas();
             emitirTransferencias(s.getTransferenciasEmitidasMozo(Sistema.getMozo().getUsername()));
         } else if (obj == Evento.ABRIR_MESA) {
             actualizarMesas();

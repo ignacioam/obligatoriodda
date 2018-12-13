@@ -11,12 +11,31 @@ public class Servicio implements Serializable {
 
     private int numero;
     private Cliente cliente;
+    private Mesa mesa;
     private ArrayList<LineaServicio> colLineas;
 
     public Servicio() {
         this.cliente = null;
         this.colLineas = new ArrayList<>();
     }
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
+    public ArrayList<LineaServicio> getColLineas() {
+        return colLineas;
+    }
+
+    public void setColLineas(ArrayList<LineaServicio> colLineas) {
+        this.colLineas = colLineas;
+    }
+    
+    
 
     public Cliente getCliente() {
         return cliente;

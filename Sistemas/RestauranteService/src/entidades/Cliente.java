@@ -8,24 +8,24 @@ import java.io.Serializable;
  */
 public class Cliente implements Serializable{
 
-    private int id;
+    private String documento;
     private String nombre;
     private String correo;
     private TipoCliente tipo;
 
-    public Cliente(int id, String nombre, String correo, TipoCliente tipo) {
-        this.id = id;
+    public Cliente(String documento, String nombre, String correo, TipoCliente tipo) {
+        this.documento = documento;
         this.nombre = nombre;
         this.correo = correo;
         this.tipo = tipo;
     }
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return documento;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String documento) {
+        this.documento = documento;
     }
 
     public String getNombre() {

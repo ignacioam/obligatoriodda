@@ -1,7 +1,6 @@
 package gestoras;
 
 import entidades.LineaServicio;
-import entidades.Mesa;
 import entidades.Servicio;
 import java.util.ArrayList;
 
@@ -31,6 +30,7 @@ public class GestoraServicios {
 
     public void addServicio(Servicio s) {
         s.setNumero(1 + colServicios.size());
+        s.setMesa(s.getMesa());
         this.colServicios.add(s);
     }
 

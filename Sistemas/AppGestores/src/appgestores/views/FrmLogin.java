@@ -3,7 +3,9 @@ package appgestores.views;
 import appgestores.Sistema;
 import appgestores.controllers.login.LoginController;
 import appgestores.controllers.login.UILogin;
+import entidades.UnidadProcesadora;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 
 /**
@@ -18,10 +20,10 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
      * Creates new form FrmLogin
      */
     public FrmLogin() {
+        initComponents();
         setSize(900, 526);
         setLocationRelativeTo(null);
         controller = new LoginController(this, Sistema.getService());
-        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +38,8 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
         btnCerrar = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         lblMensaje = new javax.swing.JLabel();
+        lblPassword2 = new javax.swing.JLabel();
+        cboxUnidades = new javax.swing.JComboBox<>();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,19 +51,19 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
 
         txtUsername.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         getContentPane().add(txtUsername);
-        txtUsername.setBounds(330, 220, 250, 40);
+        txtUsername.setBounds(330, 195, 250, 40);
 
         lblUsername.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsername.setText("Nombre de usuario");
         getContentPane().add(lblUsername);
-        lblUsername.setBounds(330, 190, 246, 23);
+        lblUsername.setBounds(330, 170, 246, 23);
 
         lblPassword.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPassword.setText("Contraseña");
         getContentPane().add(lblPassword);
-        lblPassword.setBounds(330, 270, 246, 23);
+        lblPassword.setBounds(330, 240, 246, 23);
 
         btnIniciarSesion.setBackground(new java.awt.Color(77, 11, 232));
         btnIniciarSesion.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
@@ -72,9 +76,11 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
             }
         });
         getContentPane().add(btnIniciarSesion);
-        btnIniciarSesion.setBounds(350, 360, 216, 53);
+        btnIniciarSesion.setBounds(350, 383, 216, 40);
+
+        txtPassword.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         getContentPane().add(txtPassword);
-        txtPassword.setBounds(330, 300, 250, 40);
+        txtPassword.setBounds(330, 265, 250, 40);
 
         btnCerrar.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -99,6 +105,16 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
         lblMensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblMensaje);
         lblMensaje.setBounds(20, 470, 880, 16);
+
+        lblPassword2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        lblPassword2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPassword2.setText("Unidad");
+        getContentPane().add(lblPassword2);
+        lblPassword2.setBounds(330, 310, 246, 23);
+
+        cboxUnidades.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        getContentPane().add(cboxUnidades);
+        cboxUnidades.setBounds(330, 335, 250, 40);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/appgestores/views/resources/imgs/bglogin.png"))); // NOI18N
         getContentPane().add(lblBackground);
@@ -169,10 +185,12 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JComboBox<Object> cboxUnidades;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMensaje;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPassword2;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
@@ -196,5 +214,18 @@ public class FrmLogin extends javax.swing.JFrame implements UILogin {
     @Override
     public void cerrarForm() {
         this.dispose();
+    }
+
+    @Override
+    public void listarUnidades(ArrayList<UnidadProcesadora> col) {
+        cboxUnidades.removeAllItems();
+        for (UnidadProcesadora upp : col) {
+            cboxUnidades.addItem(upp);
+        }
+    }
+
+    @Override
+    public UnidadProcesadora getUnidad() {
+        return (UnidadProcesadora) cboxUnidades.getSelectedItem();
     }
 }

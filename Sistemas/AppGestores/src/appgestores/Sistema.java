@@ -1,6 +1,7 @@
 package appgestores;
 
 import entidades.Gestor;
+import entidades.UnidadProcesadora;
 import servicio.IService;
 
 /**
@@ -11,6 +12,7 @@ public class Sistema {
 
     private static IService stub;
     private static Gestor gestor;
+    private static UnidadProcesadora up;
 
     private Sistema() {
 
@@ -31,4 +33,14 @@ public class Sistema {
     public static void setService(IService stub) {
         Sistema.stub = stub;
     }
+
+    public static UnidadProcesadora getUnidadProcesadora() {
+        return up;
+    }
+
+    public static void setUnidadProcesadora(UnidadProcesadora up) {
+        Sistema.up = up;
+    }
+    
+    
 }

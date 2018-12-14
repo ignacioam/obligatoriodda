@@ -1,15 +1,21 @@
 package gestoras;
 
+import entidades.Cliente;
 import entidades.EstadoLinea;
 import entidades.Gestor;
 import entidades.LineaServicio;
-<<<<<<< HEAD
 import entidades.Mesa;
 import entidades.Producto;
-=======
->>>>>>> ae3f7b77f91987f3889f349b08c3d595d23480af
+
 import entidades.Servicio;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import restauranteserver.conexiondb;
 
 /**
  *
@@ -40,8 +46,123 @@ public class GestoraServicios {
         s.setMesa(s.getMesa());
         this.colServicios.add(s);
     }
-
+    
+    public void addServicioBd(Servicio s){
+        conexiondb db = new conexiondb();
+        Connection conn = null;
+        
+        PreparedStatement ps = null;
+        PreparedStatement pslineas = null;
+        
+        String cliente = ((s.getCliente() == null) ? "Sin cliente" :  s.getCliente().getDocumento());
+        
+        try {
+            conn = db.getConnection();
+            conn.setAutoCommit(false);
+            
+            String query = "INSERT INTO servicios (id, cliente, mesa) VALUES(?,?,?)";
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, s.getNumero());
+            ps.setString(2, cliente);
+            ps.setInt(3, s.getMesa().getNumero());
+            
+            int rs = ps.executeUpdate();
+            
+            if(rs > 0){
+                String queryLineas = "INSERT INTO lineas_servicios (servicio, producto, cantidad, descripcion) VALUES(?, ?, ?, ?)";
+                pslineas = conn.prepareStatement(queryLineas);
+                
+                for(LineaServicio ls : s.getColLineas()){
+                    pslineas.setInt(1, s.getNumero());
+                    pslineas.setString(2, ls.getProducto().getNombre());
+                    pslineas.setInt(3, ls.getCantidad());
+                    pslineas.setString(4, ls.getDescripcion());
+                    
+                    pslineas.executeUpdate();
+                }
+                conn.commit();
+            }else{
+                conn.rollback();
+            }
+        } catch (SQLException ex) {
+            // roll back the transaction
+            try{
+                if(conn != null)
+                    conn.rollback();
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            Logger.getLogger(GestoraServicios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ArrayList<Servicio> obtenerServicios(){
+        ArrayList<Servicio> col = new ArrayList<>();
+        
+        conexiondb  db = new conexiondb();
+        Connection conn = null;
+        
+        PreparedStatement ps = null;
+        PreparedStatement pslienas = null;
+        
+        try {
+            conn = db.getConnection();
+            String query = "SELECT * FROM servicios";
+            
+            ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                
+                Cliente c = GestoraClientes.getInstance().getClientePorDoc(rs.getString("cliente"));
+                Mesa m = GestoraMesas.getInstance().obtenerMesaPorNumero(rs.getInt("mesa"));
+                Servicio s = new Servicio();
+                s.setCliente(c);
+                s.setNumero(rs.getInt("id"));
+                s.setMesa(m);
+                
+                
+                
+                String queryLineas = "SELECT * FROM lineas_servicios WHERE servicio = " + rs.getInt("id");
+                pslienas = conn.prepareStatement(queryLineas);
+                ResultSet rslineas = pslienas.executeQuery();
+                
+                while(rslineas.next()){
+                    Producto p = GestoraProductos.getInstance().getProductoPorNombre(rslineas.getString("producto"));
+                    LineaServicio linea = new LineaServicio(p, rslineas.getInt("cantidad"), rslineas.getString("descripcion"));
+                    s.addLinea(linea);
+                }
+               
+                col.add(s);
+            }
+            
+            return col;
+            
+        } catch (Exception e) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException sq) {
+            }
+            
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException sq) {
+            }
+        }
+        return col;
+    
+    }
+   
     public boolean addLineaAServicio(LineaServicio linea, int mesa) {
+        
         Servicio s = GestoraMesas.getInstance().obtenerMesaPorNumero(mesa).getServicio();
         LineaServicio ls = s.getLineaProducto(linea.getProducto().getNombre());
         if (ls != null) {

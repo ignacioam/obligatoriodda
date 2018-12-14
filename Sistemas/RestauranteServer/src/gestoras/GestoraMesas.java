@@ -44,7 +44,7 @@ public class GestoraMesas {
         Mesa m = obtenerMesaPorNumero(mesa);
         if (m != null && m.abrir()) {
             GestoraServicios.getInstance().addServicio(m.getServicio());
-            m.getServicio().setM(m);
+            m.getServicio().setMesa(m);
             return true;
         }
         return false;
@@ -55,6 +55,7 @@ public class GestoraMesas {
         if (m != null) {
             Servicio s = GestoraServicios.getInstance().getServicioPorNumero(m.getServicio().getNumero());
             if(!s.tieneLineasPendientes()){
+                GestoraServicios.getInstance().addServicioBd(s);
                 m.cerrar();
                 return true;
             } else{

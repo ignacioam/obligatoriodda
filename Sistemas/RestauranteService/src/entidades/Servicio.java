@@ -13,23 +13,16 @@ public class Servicio implements Serializable {
     private Cliente cliente;
     private Mesa mesa;
     private ArrayList<LineaServicio> colLineas;
-    private Mesa mesa;
 
     public Servicio() {
         this.cliente = null;
         this.colLineas = new ArrayList<>();
     }
-
+    
     public Mesa getMesa() {
         return mesa;
     }
 
-<<<<<<< HEAD
-    public void setM(Mesa mesa) {
-        this.mesa = mesa;
-    }
-
-=======
     public void setMesa(Mesa mesa) {
         this.mesa = mesa;
     }
@@ -43,8 +36,6 @@ public class Servicio implements Serializable {
     }
     
     
-
->>>>>>> ae3f7b77f91987f3889f349b08c3d595d23480af
     public Cliente getCliente() {
         return cliente;
     }
@@ -98,4 +89,10 @@ public class Servicio implements Serializable {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "N SERVICIO: " + numero + " CLIENTE: " + ((cliente == null) ? "Sin cliente" : cliente.getDocumento() + " - " + cliente.getNombre()) + " N MESA: " + mesa.getNumero() + " TOTAL: " + this.calcularTotal();
+    }
+
 }

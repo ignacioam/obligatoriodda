@@ -216,4 +216,9 @@ public class Server implements IService {
         }
         return false;
     }
+
+    @Override
+    public ArrayList<Servicio> obtenerServicios() throws RemoteException {
+        return gss.obtenerServicios();
+    }
 }

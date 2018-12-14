@@ -5,6 +5,7 @@ import entidades.LineaServicio;
 import entidades.Mesa;
 import entidades.Mozo;
 import entidades.Producto;
+import entidades.Servicio;
 import entidades.Transferencia;
 import entidades.UnidadProcesadora;
 import entidades.Usuario;
@@ -61,4 +62,6 @@ public interface IService extends Remote {
     ArrayList<LineaServicio> getLineasMozo(String username) throws RemoteException;
 
     public boolean cerrarMesa(int numero) throws RemoteException;
+    
+    public ArrayList<Servicio> obtenerServicios() throws RemoteException;
 }

@@ -5,7 +5,7 @@ import entidades.Comunes;
 import entidades.DeLaCasa;
 import entidades.Preferenciales;
 import java.util.ArrayList;
-import restauranteserver.conexiondb;
+
 
 /**
  *
@@ -17,7 +17,6 @@ public class GestoraClientes {
     private GestoraClientes() {
         this.colClientes = new ArrayList<>();
         preCargarClientes();
-        conexiondb conn = new conexiondb();
     }
     //Singleton
     private static GestoraClientes instance;
@@ -51,6 +50,15 @@ public class GestoraClientes {
     
     public ArrayList<Cliente> getAllClientes(){
         return (ArrayList<Cliente>) colClientes.clone();
+    }
+    
+    public Cliente getClientePorDoc(String doc){
+        for(Cliente c : colClientes){
+            if(doc == c.getDocumento()){
+                return c;
+            }
+        }
+        return null;
     }
 
 }

@@ -20,11 +20,11 @@ public class Cliente implements Serializable{
         this.tipo = tipo;
     }
 
-    public String getId() {
+    public String getDocumento() {
         return documento;
     }
 
-    public void setId(String documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 

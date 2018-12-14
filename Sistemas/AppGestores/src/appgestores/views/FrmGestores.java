@@ -50,6 +50,7 @@ public class FrmGestores extends javax.swing.JFrame implements UIGestor {
         btnCerrar = new javax.swing.JLabel();
         lblMisPedidos = new javax.swing.JLabel();
         lblPedidos = new javax.swing.JLabel();
+        lblServicios = new javax.swing.JLabel();
         panellAll = new javax.swing.JPanel();
         panelMisPedidos = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -119,6 +120,24 @@ public class FrmGestores extends javax.swing.JFrame implements UIGestor {
             }
         });
 
+        lblServicios.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        lblServicios.setForeground(new java.awt.Color(255, 255, 255));
+        lblServicios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblServicios.setText("Servicios");
+        lblServicios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblServicios.setMaximumSize(new java.awt.Dimension(133, 16));
+        lblServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblServiciosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblServiciosMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblServiciosMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
         panelUser.setLayout(panelUserLayout);
         panelUserLayout.setHorizontalGroup(
@@ -127,14 +146,19 @@ public class FrmGestores extends javax.swing.JFrame implements UIGestor {
                 .addContainerGap()
                 .addComponent(lblIconUser, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMisPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(lblMisPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(lblPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelUserLayout.createSequentialGroup()
+                    .addContainerGap(756, Short.MAX_VALUE)
+                    .addComponent(lblServicios, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(48, 48, 48)))
         );
         panelUserLayout.setVerticalGroup(
             panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,6 +175,11 @@ public class FrmGestores extends javax.swing.JFrame implements UIGestor {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(lblPedidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelUserLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(lblServicios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         panellAll.setLayout(new java.awt.CardLayout());
@@ -305,6 +334,19 @@ public class FrmGestores extends javax.swing.JFrame implements UIGestor {
         controller.finalizarPedido();
     }//GEN-LAST:event_btnFinalizarPedidoActionPerformed
 
+    private void lblServiciosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiciosMouseEntered
+        lblServicios.setFont(new Font("Lucida Sans Unicode", 1, 18));
+    }//GEN-LAST:event_lblServiciosMouseEntered
+
+    private void lblServiciosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiciosMouseExited
+        lblServicios.setFont(new Font("Lucida Sans Unicode", 1, 14));
+    }//GEN-LAST:event_lblServiciosMouseExited
+
+    private void lblServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblServiciosMousePressed
+        JDListadoServicios frm = new JDListadoServicios(this, false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_lblServiciosMousePressed
+
     private void cerrar() {
         int res = JOptionPane.showConfirmDialog(this, "¿Desea cerrar sesión?", "Atención", JOptionPane.YES_NO_OPTION);
         if (res == 0) {
@@ -360,6 +402,7 @@ public class FrmGestores extends javax.swing.JFrame implements UIGestor {
     private javax.swing.JLabel lblIconUser;
     private javax.swing.JLabel lblMisPedidos;
     private javax.swing.JLabel lblPedidos;
+    private javax.swing.JLabel lblServicios;
     private javax.swing.JList<Object> lstMisPedidos;
     private javax.swing.JList<Object> lstPedidos;
     private javax.swing.JPanel panelMisPedidos;
